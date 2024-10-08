@@ -1,24 +1,34 @@
-# README
+# <!--遊びの～と-->
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+遊ぶポイントを探せるレビューサイト 
+​
+### テーマを選んだ理由
+遊ぶ場所のレビューを投稿してもらい、その場所の位置を地図上に表示することで遊びの計画などを立てやすくするためのサイト
+遊ぶ場所を探すとき、ランキングやまとめサイト、SNSを使うと場所や遊ぶ場所の距離ががわかりづらいので予定が立てづらいです。
+自身が遊ぶ場所を探すとき、複合商業施設のみで完結させることが多かったため、周辺の個人店やポイントを視覚的に選ぶことができるサイトが需要があるのではないかと思い作成しました。
+施設のオーナーがPRやクーポンの発行などもできるようなサイト
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+​
+### ターゲットユーザ
+遊び場を探している方
+施設オーナー・スタッフ
+​
+### 主な利用シーン
+遊びの思い出を残すとき、遊ぶ場所を探すとき
+自身の店舗をPRしたい、地域をPRしたいとき
+​
+## 設計書
+<!-- 後ほど作成予定 -->
+​
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
+​
+## 使用素材
+著作権を考慮し、自作または架空のデータを扱う予定です。
+なお今後、実在するデータを利用する際には、事前に著作権保持者と契約を結んだ上で利用します。
