@@ -1,0 +1,67 @@
+<header>
+  <nav class="navbar navbar-expand-lg">
+    <h1><%= link_to image_tag("naganoCAKE_titleLOGO.png", alt: "Title Logo", size: "300x100"), "/" %></h1>
+    <% if customer_signed_in? %>
+      ようこそ、<%= current_customer.family_name + current_customer.first_name %>さん！
+    <% end %>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+        <% if customer_signed_in? %>
+          <!--カスタマーがログインしている時 -->
+          <li>
+            <%= link_to "マイページ", customers_my_page_path, class: "btn btn-outline-dark" %>
+          </li>
+          <li>
+            <%= link_to "商品一覧", items_path, class: "btn btn-outline-dark" %>
+          </li>
+          <li>
+            <%= link_to "カート", cart_items_path, class: "btn btn-outline-dark" %>
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark" %></li>
+          </li>
+
+        <% elsif admin_signed_in? %>
+          <!-- 管理者がログインしている時 -->
+          <li>
+            <%= link_to "商品一覧", admin_items_path, class: "btn btn-outline-dark" %>
+          </li>
+          <li>
+            <%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-dark" %>
+            <!--customer一覧用パス入力-->
+          </li>
+          <li>
+            <%= link_to "注文履歴一覧" , admin_pages_home_path, class: "btn btn-outline-dark" %>
+            <!--order履歴一覧用パス入力-->
+          </li>
+          <li>
+            <%= link_to "ジャンル一覧", admin_genres_path, class: "btn btn-outline-dark" %>
+            <!--genre一覧-->
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark" %>
+          </li>
+
+        <% else %>
+          <!-- ログインしていない時 -->
+          <li>
+            <%= link_to "About", about_path, class: "btn btn-outline-dark" %>
+          </li>
+          <li>
+            <%= link_to "商品一覧", items_path, class: "btn btn-outline-dark" %>
+          </li>
+          <li>
+            <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-dark" %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-dark" %>
+          </li>
+        <% end %>
+        <li>
+          <%= render "layouts/search" %>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
