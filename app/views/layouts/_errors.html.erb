@@ -1,0 +1,8 @@
+<% if obj.errors.any? %>
+  <h4><%= obj.errors.count %>件のエラーが発生したため、保存ができませんでした。</h4>
+　　<ul>
+      <% obj.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
