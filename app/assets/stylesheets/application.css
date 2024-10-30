@@ -13,3 +13,61 @@
  *= require_tree .
  *= require_self
  */
+@import 'bootstrap';
+
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: url('main_kabegami.jpg');
+  background-size: contain;
+  background-repeat: repeat;
+  width: 100%;
+}
+
+/*.sticky-container {*/
+/*  position: sticky;*/
+/*  top: 0;*/
+/*  right: 0;*/
+/*  left: 0;*/
+/*  z-index: 10;*/
+/*  width: 100%;*/
+/*  margin: 0;*/
+/*}*/
+
+header {
+  background-image: url('mokumetyou.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+.btn-outline-dark {
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+
+
+footer {
+  background-image: url('mokumetyou.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: auto;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+}
+
+/*p {*/
+/*  z-index: 5;*/
+/*}*/
+
+.text-center {
+  padding: 15px;
+  font-family: 'Kiwi Maru', sans-serif;
+}
