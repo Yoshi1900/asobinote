@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create,:destroy]
     end
     resources :playgrounds, only: [:new, :index, :show, :create, :edit, :update, :destroy]
-    get 'users/my_page' => 'users#show'
+    get '/mypage' => 'users#mypage'
     get 'users/information/edit' => 'users#edit'
     patch 'users/information' => 'users#update'
     get 'users/unsubscribe' => 'users#unsubscribe'
