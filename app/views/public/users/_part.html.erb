@@ -1,0 +1,29 @@
+<% if user_signed_in? && user == current_user %>
+    <div style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+      <h2 class="text-center" style="color: #dc3d26;">マイページ</h2>
+    </div>
+<% else %>
+    <div style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+      <h2 class="text-center" style="color: #dc3d26;">ユーザーページ</h2>
+    </div>
+<% end %>
+
+<div class="profile">
+  <% if user.avatar_image.present? %>
+    <%= image_tag user.avatar_image(100,100).url, class: "profile-avatar" %>
+  <% end %>
+  
+  <div class="profile-item">
+    <span class="profile-label">ニックネーム:</span>
+    <span class="profile-content"><%= user.nickname %></span>
+  </div>
+  
+  <div class="profile-item">
+    <span class="profile-label">自己紹介:</span>
+    <span class="profile-content"><%= user.introduction %></span>
+  </div>
+</div>
+
+   <% if user_signed_in? && user == current_user && user.email != "guest@example.com" %>
+    <%= link_to "編集", edit_user_path(user), class: "btn btn-primary" %>
+  <% end %>

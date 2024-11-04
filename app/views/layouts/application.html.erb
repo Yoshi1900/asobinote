@@ -6,11 +6,24 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/4c2477e0ba.js" crossorigin="anonymous"></script>
+  </head>
+
   </head>
 
   <body>
-    <%= yield %>
+    <!-- ヘッダー -->
+      <%= render "layouts/header" %>
+
+    <!-- Body部分 -->
+    <div class="container">
+      <%= yield %>
+    </div>
+
+    <!-- Footer -->
+    <%= render "layouts/footer" %>
   </body>
 </html>
+
