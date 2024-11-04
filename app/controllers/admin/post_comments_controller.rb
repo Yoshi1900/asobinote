@@ -23,4 +23,3 @@ class Admin::PostCommentsController < ApplicationController
   end
   
 end
-end
