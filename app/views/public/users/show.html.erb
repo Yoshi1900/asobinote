@@ -1,2 +1,46 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div class="form-group row" style="padding:20px;">
+  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h2 class="text-center" style="color: #dc3d26;">ユーザー詳細</h2>
+  </div>
+</div>
+<%= flash[:notice] %>
+
+<div class="px-5">
+  <%= render "public/shared/error_messages", resource: resource %>
+
+
+  <div class="px-5">
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        ニックネーム
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+       <p><%= @user.nickname %></p>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        アバター画像
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= image_tag @user.avatar_image.url if @user.avatar_image.present? %>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        自己紹介
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <p><%= @user.introduction %></p>
+      </div>
+    </div>
+
+    <div class="row" style="padding-bottom:20px;">
+      <div class="col-12 text-center">
+        <%= link_to "編集", edit_user_path(@user), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,79 +1,93 @@
 <div class="form-group row" style="padding:20px;">
-  <div class="col-6 offset-3" style="border-radius: 30px; background-color: lightblue; padding-top:5px;">
-    <h2 class="text-center text-white">新規会員登録</h2>
+  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h2 class="text-center" style="color: #dc3d26;">新規会員登録</h2>
   </div>
 </div>
 <%= flash[:notice] %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
+<div class="px-5">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
 
-  <div class="form-group row border-bottom">
-    <div class="col-5">
-      メールアドレス
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        メールアドレス
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.email_field :email, placeholder: "sample@example.com", class: "w-100" %>
+      </div>
     </div>
-    <div class="col-7" style="margin-bottom: 15px;">
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class: "w-100" %>
-    </div>
-  </div>
 
-  <div class="form-group row border-bottom">
-    <div class="col-5">
-      ニックネーム
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        ニックネーム
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.text_field :nickname, class: "w-100" %>
+      </div>
     </div>
-    <div class="col-3" style="margin-bottom: 15px;">
-      <%= f.text_field :nickname, class: "w-100" %>
-  </div>
-  
-  <div class="form-group row border-bottom">
-    <div class="col-5">
-      自己紹介
-    </div>
-    <div class="col-3" style="margin-bottom: 15px;">
-      <%= f.text_field :introduction, class: "w-100" %>
-  </div>
-  
-  <div class="form-group row border-bottom">
-    <div class="col-5">
-      電話番号
-    </div>
-    <div class="col-3" style="margin-bottom: 15px;">
-      <%= f.text_field :phone_number, autofocus: true, autocomplete: "tell_number", placeholder: "09012345678", class: "w-100" %>
-    </div>
-  </div>
 
-  <div class="form-group row border-bottom">
-    <div class="col-5">
-      パスワード
-      <% if @minimum_password_length %>
-      (<%= @minimum_password_length %> 文字以上)
-      <% end %>
-    <div class="col-3" style="margin-bottom: 15px;">
-      <%= f.password_field :password, autocomplete: "new-password", class: "w-100" %>
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+       アバター画像
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.file_field :avatar_image, direct_upload: true %>
+      </div>
     </div>
-  </div>
 
-  
-  <div class="form-group row">
-    <div class="col-5">
-      パスワード(確認用)
-    </div>
-    <div class="col-3" style="margin-bottom: 15px;">
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-100" %>
-    </div>
-  </div>
-  >
 
-   <div class="row" style="padding-bottom:20px;">
-    <div class="col-12 text-center">
-      <%= f.submit "新規登録", class: "btn btn-success" %>
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        自己紹介
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.text_field :introduction, class: "w-100" %>
+      </div>
     </div>
-  </div>
-<% end %>
+    
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        電話番号
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.text_field :phone_number, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        パスワード
+        <% if @minimum_password_length %>
+        (<%= @minimum_password_length %> 文字以上)
+        <% end %>
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.password_field :password, class: "w-100" %>
+      </div>
+    </div>
+
+    
+    <div class="form-group row">
+      <div class="col-5">
+        パスワード(確認用)
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="row" style="padding-bottom:20px;">
+      <div class="col-12 text-center">
+        <%= f.submit "新規登録", class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <div class="row" style="padding:20px;">
-  <div class="col-4 offset-4" style="border-radius: 30px; background-color: lightblue; padding-top:5px;">
-    <h5 class="text-center text-white">既に登録済の方<h5>
+  <div class="col-4 offset-4" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h5 class="text-center"  style="color: #dc3d26;">既に登録済の方<h5>
   </div>
 </div>
 <div class="row">
