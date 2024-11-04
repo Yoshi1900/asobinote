@@ -1,27 +1,33 @@
 <p id="notice"></p>
 <div class="container px-5 px-sm-0">
   <div class="row">
-   <div class="col-md-3">
-    <%= render 'part', user: @user %>
-    <!-- 部分テンプレート -->
-   </div>
+    <div class="col-md-3">
+      <%= render 'part', user: @user %>
+      <!-- 部分テンプレート -->
+    </div>
 
     <div class="col-md-8 offset-md-1">
-    <h2>投稿一覧</h2>
-    <table class="table ">
-    <tr>
-     <th></th><th>タイトル</th><th></th></tr>
-   <% @user.posts.each do |post| %>
-   <tr>
-     <td><%= link_to user_path do %><%= image_tag @user.get_avatar_image(100,100) %><% end %></td>
-     <td><%= link_to post_path(post) do %><%= post.title %><% end %></td>
-      <td>
-       <% if current_user == @user %>
-      <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
-      </td>
-   </tr>
-   <% end %>
-    </table>
-   </div>
+      <h2>投稿一覧</h2>
+      <table class="table ">
+        <tr>
+          <th>ユーザー</th><th>タイトル</th><th></th>
+        </tr>
+        <% @user.posts.each do |post| %>
+          <tr>
+            <td>
+              <%= link_to user_path(@user) do %><%= image_tag @user.get_avatar_image(100,100) %><% end %>
+            </td>
+            <td>
+              <%= link_to post_path(post) do %><%= post.title %><% end %>
+            </td>
+            <td>
+              <% if current_user == @user %>
+                <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
    </div>
   </div>
