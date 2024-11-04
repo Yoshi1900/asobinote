@@ -9,7 +9,9 @@ class Admin::PostsController < ApplicationController
   end
 
   def show
-  end
+    @post = PostImage.find(params[:id])
+    @post_comment = PostComment.new
+　end
 
   def destroy
   end
