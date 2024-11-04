@@ -45,6 +45,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, 
                                                        :email,
                                                        :introduction,
+                                                       :avatar_image,
                                                        :phone_number,
                                                        :password])
   end
