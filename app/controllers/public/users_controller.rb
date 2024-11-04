@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:my_page, :edit, :update]
+  before_action :authenticate_user!, only: [:mypage, :edit, :update]
   before_action :set_user, only: [:show, :edit, :update]
   before_action :ensure_guest_user, only: [:edit]
   
@@ -27,13 +27,26 @@ class Public::UsersController < ApplicationController
     end
   end
 
-  def destroy
+  def unsubscribe
   end
-  
+
+  def withdraw
+    @user = current_user
+    @user.update(is_active: false)
+    reset_session
+
+    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
+    redirect_to root_path
+  end
+
   private
     
   def set_user
-    @user = User.find(params[:id])
+    if params[:id] == "my_page"
+      @user = User.find(current_user.id)
+    else
+      @user = User.find(params[:id])
+    end
   end
 
   def ensure_guest_user
