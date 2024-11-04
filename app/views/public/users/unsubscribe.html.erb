@@ -1,0 +1,11 @@
+
+  <div class='row d-flex justify-content-center'>
+      <h1><strong>本当に退会しますか？</strong></h1>
+      <p class='mt-5'>退会すると、登録情報や</br>
+      これまでの投稿の閲覧ができなくなります。</br>
+      退会する場合は、「退会する」をクリックしてください。</p>
+  </div>
+   <div class="row justify-content-center">
+    <%= link_to "退会しない", mypage_path, class: 'btn btn-primary'%>
+    <%= link_to "退会する", users_withdraw_path, method: :PATCH, data: {confirm: "本当に退会してもよろしいですか？"}, class: 'btn btn-danger ml-3' %>
+  </div>
