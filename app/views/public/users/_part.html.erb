@@ -24,9 +24,6 @@
   </div>
 </div>
 
-   <% if user_signed_in? && user == current_user %>
-
-        <%= link_to "編集", edit_user_path(user), class: "btn btn-primary" %>
-
+   <% if user_signed_in? && user == current_user && user.email != "guest@example.com" %>
+    <%= link_to "編集", edit_user_path(user), class: "btn btn-primary" %>
   <% end %>
-
