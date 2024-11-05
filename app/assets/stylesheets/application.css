@@ -14,7 +14,7 @@
  *= require_self
  */
 
-body{
+/* body{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -27,15 +27,15 @@ body{
   width: 100%;
 }
 
-/*.sticky-container {*/
-/*  position: sticky;*/
-/*  top: 0;*/
-/*  right: 0;*/
-/*  left: 0;*/
-/*  z-index: 10;*/
-/*  width: 100%;*/
-/*  margin: 0;*/
-/*}*/
+.sticky-container {
+ position: sticky;
+ top: 0;
+ right: 0;
+ left: 0;
+ z-index: 10;
+ width: 100%;
+ margin: 0;
+}
 
 header {
   background-image: url('mokumetyou.jpg');
@@ -62,11 +62,11 @@ footer {
   width: 100%;
 }
 
-/*p {*/
-/*  z-index: 5;*/
-/*}*/
+p {
+ z-index: 5;
+}
 
 .text-center {
   padding: 15px;
   font-family: 'Kiwi Maru', sans-serif;
-}
+}  */
