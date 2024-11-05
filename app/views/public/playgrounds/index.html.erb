@@ -1,2 +1,35 @@
-<h1>Public::Playgrounds#index</h1>
-<p>Find me in app/views/public/playgrounds/index.html.erb</p>
+<div class="form-group row" style="padding:20px;">
+  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h2 class="text-center" style="color: #dc3d26;">遊び場の一覧</h2>
+  </div>
+</div>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>遊び場名</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @playgrounds.each do |playground| %>
+      <tr>
+        <td>
+          <% if playground.playground_images.attached? %>
+            <%= image_tag playground.playground_images.first.variant(resize_to_limit: [100, 100]), class: "thumbnail" %>
+          <% else %>
+            <%= image_tag playground.get_playground_image, class: "thumbnail" %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to playground.name, playground_path(playground), class: 'playground-link' %>
+        </td>
+        <td><%= truncate(playground.description, length: 50) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @playgrounds %>

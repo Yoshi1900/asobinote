@@ -1,2 +1,27 @@
-<h1>Public::Playgrounds#show</h1>
-<p>Find me in app/views/public/playgrounds/show.html.erb</p>
+<div class="form-group row" style="padding:20px;">
+  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h2 class="text-center" style="color: #dc3d26;"><%= @playground.name %>の情報</h2>
+  </div>
+</div>
+
+<div class="playground-details">
+  <p><strong>説明:</strong> <%= @playground.description %></p>
+  <p><strong>郵便番号:</strong> <%= @playground.post_code %></p>
+  <p><strong>住所:</strong> <%= @playground.address %></p>
+  <p><strong>電話番号:</strong> <%= @playground.phone_number %></p>
+  <p><strong>ステータス:</strong> <%= @playground.is_active ? "営業" : "閉業" %></p>
+
+  <div class="playground-images">
+    <% if @playground.playground_images.attached? %>
+      <% @playground.playground_images.each do |image| %>
+        <%= image_tag image, class: "playground-image", size: "200x150" %>
+      <% end %>
+    <% else %>
+      <p>画像がありません</p>
+    <% end %>
+  </div>
+</div>
+
+<div class="actions">
+  <%= link_to '編集', edit_playground_path(@playground), class: 'btn btn-primary' %>
+</div>
