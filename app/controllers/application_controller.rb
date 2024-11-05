@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
         when Admin
           admin_root_path
         when User
-          users_my_page_path
+          mypage_path
       end
     end
   
@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
                                                          :nickname, 
                                                          :phone_number, 
                                                          :introduction, 
+                                                         :avatar_image,
                                                          :is_active
                                                          ])
     end
