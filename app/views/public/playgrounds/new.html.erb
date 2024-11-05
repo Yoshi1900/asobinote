@@ -1,2 +1,86 @@
-<h1>Public::Playgrounds#new</h1>
-<p>Find me in app/views/public/playgrounds/new.html.erb</p>
+<div class="form-group row" style="padding:20px;">
+  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h2 class="text-center" style="color: #dc3d26;">新しい遊び場登録</h2>
+  </div>
+</div>
+<%= flash[:notice] %>
+
+<div class="px-5">
+
+    <%= render "public/shared/error_messages", resource: resource %>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        メールアドレス
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.email_field :email, placeholder: "sample@example.com", class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        ニックネーム
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.text_field :nickname, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+       アバター画像
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.file_field :avatar_image, direct_upload: true %>
+      </div>
+    </div>
+
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        自己紹介
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.text_field :introduction, class: "w-100" %>
+      </div>
+    </div>
+    
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        電話番号
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.text_field :phone_number, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        パスワード
+        <% if @minimum_password_length %>
+        (<%= @minimum_password_length %> 文字以上)
+        <% end %>
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.password_field :password, class: "w-100" %>
+      </div>
+    </div>
+
+    
+    <div class="form-group row">
+      <div class="col-5">
+        パスワード(確認用)
+      </div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="row" style="padding-bottom:20px;">
+      <div class="col-12 text-center">
+        <%= f.submit "新規登録", class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+</div>
