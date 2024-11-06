@@ -29,7 +29,11 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :new, :show, :create, :destroy] do
       resources :post_comments, only: [:create,:destroy]
     end
-    resources :playgrounds, only: [:new, :index, :show, :create, :edit, :update, :destroy]
+    resources :playgrounds, only: [:new, :index, :show, :create, :edit, :update]do
+      member do
+        delete :remove_image
+      end
+    end
     get '/mypage' => 'users#mypage'
     get 'users/information/edit' => 'users#edit'
     patch 'users/information' => 'users#update'

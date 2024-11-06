@@ -3,7 +3,7 @@ class Playground < ApplicationRecord
   has_many :tags, through: :taggings
   has_many :posts, dependent: :destroy
   belongs_to :user
-  has_one_attached :playground_image
+  has_many_attached :playground_images
 
   def get_playground_image
     unless playground_image.attached?
@@ -12,5 +12,16 @@ class Playground < ApplicationRecord
     end
     playground_image.variant(resize_to_limit: [100, 100]).processed
   end
+
+  validate :validate_image_count
+
+  private
+
+  def validate_image_count
+    if playground_images.attached? && playground_images.count > 5
+      errors.add(:playground_images, "は5枚までしかアップロードできません。")
+    end
+  end
+
 
 end

@@ -6,43 +6,51 @@
 <%= flash[:notice] %>
 
 <div class="px-5">
-
-    <%= render "public/shared/error_messages", resource: resource %>
+  <%= form_with model: @playground, local: true do |f| %>
+    <%= render "public/shared/error_messages", resource: @playground %>
 
     <div class="form-group row border-bottom">
       <div class="col-5">
-        メールアドレス
+        遊び場名
       </div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.email_field :email, placeholder: "sample@example.com", class: "w-100" %>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.text_field :name, required: true, class: "w-100" %>
       </div>
     </div>
 
     <div class="form-group row border-bottom">
       <div class="col-5">
-        ニックネーム
+        説明
       </div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.text_field :nickname, class: "w-100" %>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.text_area :description, required: true, class: "w-100" %>
       </div>
     </div>
 
     <div class="form-group row border-bottom">
       <div class="col-5">
-       アバター画像
+      画像
       </div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.file_field :avatar_image, direct_upload: true %>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.file_field :playground_images, multiple: true, direct_upload: true %>
       </div>
     </div>
 
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        郵便番号
+      </div>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.text_field :post_code, required: true, class: "w-100" %>
+      </div>
+    </div>
 
     <div class="form-group row border-bottom">
       <div class="col-5">
-        自己紹介
+        住所
       </div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.text_field :introduction, class: "w-100" %>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.text_area :address, required: true, class: "w-100" %>
       </div>
     </div>
     
@@ -50,36 +58,17 @@
       <div class="col-5">
         電話番号
       </div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.text_field :phone_number, class: "w-100" %>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.text_field :phone_number, required: true, class: "w-100" %>
       </div>
     </div>
 
-    <div class="form-group row border-bottom">
-      <div class="col-5">
-        パスワード
-        <% if @minimum_password_length %>
-        (<%= @minimum_password_length %> 文字以上)
-        <% end %>
-      </div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.password_field :password, class: "w-100" %>
-      </div>
-    </div>
-
-    
-    <div class="form-group row">
-      <div class="col-5">
-        パスワード(確認用)
-      </div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-100" %>
-      </div>
-    </div>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :is_active, value: "true" %>
 
     <div class="row" style="padding-bottom:20px;">
       <div class="col-12 text-center">
-        <%= f.submit "新規登録", class: "btn btn-success" %>
+        <%= f.submit "遊び場登録", class: "btn btn-success" %>
       </div>
     </div>
   <% end %>
