@@ -5,11 +5,14 @@ class Public::PlaygroundsController < ApplicationController
 
   def index
     @playgrounds = Playground.all
-    @playgrounds = Playground.page(params[:page]).per(10)
+    @playgrounds_pages = Playground.page(params[:page]).per(5)
   end
 
   def show
     @playground = Playground.find(params[:id])
+    @playground_posts = @playground.posts
+    @playgrounds_pages = @playground_posts.page(params[:page]).per(5)
+    @post = Post.new
   end
 
   def edit

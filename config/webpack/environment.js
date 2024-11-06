@@ -1,11 +1,11 @@
-javascript
+
 
 require("dotenv").config();
 
 const { environment } = require('@rails/webpacker')
 const webpack = require('webpack')
 
-# bootstrap,星レビュー機能時に変更
+// bootstrap,星レビュー機能時に変更
 environment.plugins.prepend(
   'Provide',
   new webpack.ProvidePlugin({
