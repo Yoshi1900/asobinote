@@ -9,9 +9,8 @@ class Public::PlaygroundsController < ApplicationController
   end
 
   def show
-    @playground = Playground.find(params[:id])
-    @playground_posts = @playground.posts
-    @playgrounds_pages = @playground_posts.page(params[:page]).per(5)
+    @playground = Playground.find(params[:id])  
+    @playgrounds_pages =@playground.posts.page(params[:page]).per(5)
     @post = Post.new
   end
 

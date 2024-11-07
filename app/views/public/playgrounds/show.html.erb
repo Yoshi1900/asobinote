@@ -10,6 +10,7 @@
       <p><strong>住所:</strong> <%= @playground.address %></p>
       <p><strong>電話番号:</strong> <%= @playground.phone_number %></p>
       <p><strong>ステータス:</strong> <%= @playground.is_active ? "営業" : "閉業" %></p>
+      <p><strong>評価:</strong> <%= @playground.posts.count %>件<%= render "/public/playgrounds/average_rate.html.erb", playground: @playground %></p>
       <%= link_to '編集', edit_playground_path(@playground), class: 'btn btn-primary' %>
     </div>
     <div class="col-8 playground-images">
@@ -22,7 +23,7 @@
       <% end %>
     </div>
   </div>
-  <div class="row min-vh-100">
+  <div class="row">
   
     <!-- 新規投稿の部分テンプレート -->
     <div class="col-4">
@@ -42,7 +43,7 @@
           </tr>
         </thead>
         <tbody>
-            <% @playground_posts.each do |playground_post| %> 
+            <% @playground.posts.each do |playground_post| %> 
             <tr>
               <td>
                 <% if playground_post.post_images.attached? %>
@@ -50,13 +51,13 @@
                 <% end %>
               </td>
               <td>
-                <%= link_to playground_post.name, post_path(playground_post) %>
+                <%= link_to playground_post.title, post_path(playground_post) %>
               </td>
               <td>
                 <%= truncate(playground_post.body, length: 50) %>
               </td>
               <td>
-                <%= render "posts/static_rate", post: playground_post %>
+                <%= render "/public/posts/static_rate", post: playground_post %>
               </td>
             </tr>
           <% end %>

@@ -1,2 +1,44 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<!--
+<div class="form-group row" style="padding:20px;">
+  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h2 class="text-center" style="color: #dc3d26;"><%= @post.playground.name %>の情報</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-4">
+    <p><strong>説明:</strong> <%= @post.playground.description %></p>
+    <p><strong>郵便番号:</strong> <%= @post.playground.post_code %></p>
+    <p><strong>住所:</strong> <%= @post.playground.address %></p>
+    <p><strong>電話番号:</strong> <%= @post.playground.phone_number %></p>
+    <p><strong>ステータス:</strong> <%= @post.playground.is_active ? "営業" : "閉業" %></p>
+    <p><strong>評価:</strong> <%= @post.playground.posts.count %>件<%= render "/public/playgrounds/average_rate.html.erb", playground: @post.playground %></p>
+  </div>
+  <div class="col-8 playground-images">
+    <% if @post.playground.playground_images.attached? %>
+      <% @post.playground.playground_images.each do |image| %>
+        <%= image_tag image, class: "playground-image", size: "200x150" %>
+      <% end %>
+    <% else %>
+      <p>画像がありません</p>
+    <% end %>
+  </div>
+</div>
+-->
+<div class="row">
+  <div class="col-4 mt-3">
+    <p><strong>タイトル:</strong> <%= @post.title %></p>
+    <p><strong>本文:</strong> <%= @post.body %></p>
+    <p><strong>評価:</strong><%= render "public/posts/static_rate", post: @post %></p>
+    <%= link_to '削除する', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+    <%= link_to '遊び場に戻る', playground_path(@post.playground), class: 'btn btn-secondary' %>
+  </div>
+  <div class="col-8 post-images mt-3">
+    <% if @post.post_images.attached? %>
+      <% @post.post_images.each do |image| %>
+        <%= image_tag image, class: "post-image", size: "200x150" %>
+      <% end %>
+    <% else %>
+      <p>画像がありません</p>
+    <% end %>
+  </div>
+</div>
