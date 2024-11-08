@@ -6,19 +6,26 @@
       <!-- 部分テンプレート -->
     </div>
 
-    <div class="col-md-8 offset-md-1">
+    <div class="col-md-9 ">
       <h2>投稿一覧</h2>
       <table class="table ">
         <tr>
-          <th>ユーザー</th><th>タイトル</th><th></th>
+          <th></th><th>タイトル</th><th></th><th></th>
         </tr>
         <% @user.posts.each do |post| %>
           <tr>
-            <td>
-              <%= link_to user_path(@user) do %><%= image_tag @user.get_avatar_image(100,100) %><% end %>
+            <td style="padding-right: 5px;">
+              <% if post.post_images.attached? %>
+                <% post.post_images.first(3).each do |image| %>
+                  <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "thumbnail" %>
+                <% end %>
+              <% end %>
             </td>
             <td>
               <%= link_to post_path(post) do %><%= post.title %><% end %>
+            </td>
+            <td>
+              <%= truncate(post.body, length: 50) %>
             </td>
             <td>
               <% if current_user == @user %>

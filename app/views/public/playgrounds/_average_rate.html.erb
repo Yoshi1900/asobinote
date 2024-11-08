@@ -1,0 +1,17 @@
+<div class="ml-2" id="star_<%= playground.id %>"></div>
+<script>
+$(document).on('turbolinks:load', function() {
+  let elem = document.querySelector('#star_<%= playground.id %>');
+  if (elem == null) return;
+  
+  elem.innerHTML = "";
+  let opt = {  
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: <%= playground.posts.average(:star).to_f.round(1) %>,
+    readOnly: true,
+  };
+  raty(elem, opt);
+});
+</script>

@@ -1,0 +1,83 @@
+<div class="form-group row " style="padding:20px;">
+  <div class="col-7 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h3 class="text-center" style="color: #dc3d26;">新規投稿</h3>
+  </div>
+</div>
+<%= flash[:notice] %>
+
+
+
+<div class="col-12">
+  <%= form_with model: post, local: true do |f| %>
+    <%= render "public/shared/error_messages", resource: post %>  
+
+      <div class="form-group row border-bottom">
+        <div class="col-4">
+        タイトル
+        </div>
+        <div class="col-8" style="margin-bottom: 10px;">
+          <%= f.text_field :title, required: true %>
+        </div>
+      </div>
+
+      <div class="form-group row border-bottom">
+        <div class="col-4">
+          本文
+        </div>
+        <div class="col-8" style="margin-bottom: 10px;">
+          <%= f.text_area :body, required: true, class: "w-100" %>
+        </div>
+      </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-4">
+      画像
+      </div>
+      <div class="col-8" style="margin-bottom: 10px;">
+        <%= f.file_field :post_images, multiple: true, direct_upload: true %></br>
+        <small>1MB以下で最大5枚まで</small>
+      </div>
+    </div>
+
+
+    <div class="form-group row border-bottom">
+      <div class="col-4">
+        評価
+      </div>
+      <div class="col-8" style="margin-bottom: 10px;">
+      <% if post.id.nil? %>
+        <div class="form-group" id="star">
+          <%= f.hidden_field :star, id: :review_star, class: 'form-control' %>
+          <div id="post_raty"></div>
+        </div>
+          <script>
+            
+              let elem = document.querySelector('#post_raty');
+            
+
+              elem.innerHTML = ""
+              let opt = {  
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                scoreName: 'post[star]',
+                };
+                raty(elem, opt);
+     
+          </script>
+      <% else %>
+        <div class="form-group">
+          <%= render "static.rate", post: post %>
+        </div>
+      <% end %> 
+      </div>
+    </div>
+
+      <%= f.hidden_field :playground_id, value: @playground.id %>
+      <%= f.hidden_field :is_displayed, value: "true" %>
+
+    <div class="actions">
+      <%= f.submit "この遊び場に新規投稿" %>
+    </div>
+  <% end %>
+</div>

@@ -5,11 +5,13 @@ class Public::PlaygroundsController < ApplicationController
 
   def index
     @playgrounds = Playground.all
-    @playgrounds = Playground.page(params[:page]).per(10)
+    @playgrounds_pages = Playground.page(params[:page]).per(5)
   end
 
   def show
-    @playground = Playground.find(params[:id])
+    @playground = Playground.find(params[:id])  
+    @playgrounds_pages =@playground.posts.page(params[:page]).per(5)
+    @post = Post.new
   end
 
   def edit
@@ -18,7 +20,10 @@ class Public::PlaygroundsController < ApplicationController
   
   def update
     @playground = Playground.find(params[:id])
-    if @playground.update(playground_params)
+    if playground_params[:images].present?
+      @playground.images.attach(playground_params[:images]) # 既存の画像を保持しつつ新しい画像を追加
+    end
+    if @playground.update(playground_params.except(:images)) # 画像以外の属性を更新
       redirect_to @playground, notice: 'Playground was successfully updated.'
     else
       render :edit
