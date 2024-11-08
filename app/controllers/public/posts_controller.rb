@@ -23,6 +23,9 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to playground_path(@post.playground), notice: '投稿の削除に成功しました'
   end
 
   private
@@ -35,4 +38,5 @@ class Public::PostsController < ApplicationController
                                  :is_displayed, 
                                  post_images: [])
   end
+  
 end

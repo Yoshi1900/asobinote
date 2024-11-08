@@ -1,4 +1,5 @@
 class Admin::PlaygroundsController < ApplicationController
+  before_action :authenticate_admin!
   def index
   end
 

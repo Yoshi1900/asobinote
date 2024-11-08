@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    root to: 'admin#home'
+    root to: 'sessions#new', as: :root
     resources :users, only: [:index, :edit, :show, :update, :destroy]
     resources :tags, only: [:index, :edit, :update, :destroy]
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
@@ -35,8 +35,6 @@ Rails.application.routes.draw do
       end
     end
     get '/mypage' => 'users#mypage'
-    get 'users/information/edit' => 'users#edit'
-    patch 'users/information' => 'users#update'
     get 'users/unsubscribe' => 'users#unsubscribe'
     patch 'users/withdraw' => 'users#withdraw'
     resources :users, only: [:show, :edit, :update] 

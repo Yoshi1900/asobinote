@@ -13,13 +13,13 @@ class Playground < ApplicationRecord
     playground_image.variant(resize_to_limit: [width, height]).processed
   end
 
-  validate :validate_image_count
+  validate :image_count_within_limit
 
   private
 
-  def validate_image_count
-    if playground_images.attached? && playground_images.count > 5
-      errors.add(:playground_images, "は5枚までしかアップロードできません。")
+  def image_count_within_limit
+    if playground_images.attached? && playground_images.count > 8
+      errors.add(:playground_images, "は合計8枚までしかアップロードできません。")
     end
   end
 

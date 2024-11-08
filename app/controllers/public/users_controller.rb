@@ -18,12 +18,22 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-    # アップデートがうまくいけば、マイページに戻り、
-    # うまくいかなければ、もう一度編集ページを表示する
-   if current_user.update(user_params)
-     redirect_to user_path(current_user)
+    @user = current_user
+    @user.avatar.attach(params[:avatar_image]) if params[:avatar_image].present?
+   # パスワードが入力された場合のみ更新
+    if user_params[:password].present?
+      if @user.update(user_params)
+        redirect_to user_path(current_user), notice: "プロフィールが更新されました。"
+      else
+        render :edit, alert: "プロフィールの更新に失敗しました。"
+      end
     else
-     redirect_to edit_user_path(current_user)
+      # パスワードが空の場合、パスワード以外の情報のみ更新
+      if @user.update(user_params.except(:password, :password_confirmation))
+        redirect_to user_path(current_user), notice: "プロフィールが更新されました。"
+      else
+        render :edit, alert: "プロフィールの更新に失敗しました。"
+      end
     end
   end
 
@@ -41,6 +51,16 @@ class Public::UsersController < ApplicationController
 
   private
     
+  def user_params
+    params.require(:user).permit(:nickname,
+                                 :introduction, 
+                                 :phone_number, 
+                                 :email,
+                                 :password, 
+                                 :password_confirmation,
+                                 :avatar_image)
+  end
+
   def set_user
     if params[:id] == "my_page"
       @user = User.find(current_user.id)

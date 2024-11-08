@@ -6,6 +6,27 @@
   color: #fff; /* テキストの色 */
 }
 
+.container{
+  padding-top:10px;
+  height:auto;
+  padding-bottom:10px;
+  margin-bottom:50px;
+}
+
+// フッターを固定するcss
+footer {
+  position: fixed; bottom: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+}
+
+
 // ユーザー詳細のデザイン
 .profile {
   display: flex;
@@ -34,18 +55,7 @@
   color: #333;
 }
 
-// フッターを固定するcss
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background-color: #333;
-  color: white;
-  text-align: center;
-  line-height: 50px;
-}
+
 
 // 遊び場詳細のcss
 .playground-images {
@@ -58,4 +68,24 @@ footer {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 5px;
+}
+
+.post-images {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px; /* 画像間の間隔を調整 */
+}
+
+.post-image {
+  width: 100%; /* 画像がグリッドセルの幅いっぱいになるように設定 */
+  height: auto;
+}
+
+.comment p {
+  position: relative;
+}
+
+.delete-button {
+  float: right;
+  margin-left: 10px; /* 必要に応じて調整 */
 }

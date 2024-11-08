@@ -16,7 +16,7 @@ class User < ApplicationRecord
     end
     avatar_image.variant(resize_to_limit: [width, height]).processed
   end
-
+ 
 
 
   GUEST_USER_EMAIL = "guest@example.com"
