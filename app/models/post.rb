@@ -21,4 +21,19 @@ class Post < ApplicationRecord
         errors.add(:post_images, "は合計8枚までしか保存できません。")
       end
     end
+
+    def self.looks(search, word)
+      if search == "perfect_match"
+        @posts = Post.where("title LIKE ? OR body LIKE ?", "#{word}", "#{word}").where(is_displayed: true).order(created_at: :desc)
+      elsif search == "forward_match"
+        @posts = Post.where("title LIKE ? OR body LIKE ?", "#{word}%", "#{word}%").where(is_displayed: true).order(created_at: :desc)
+      elsif search == "backward_match"
+        @posts = Post.where("title LIKE ? OR body LIKE ?", "%#{word}", "%#{word}").where(is_displayed: true).order(created_at: :desc)
+      elsif search == "partial_match"
+        @posts = Post.where("title LIKE ? OR body LIKE ?", "%#{word}%", "%#{word}%").where(is_displayed: true).order(created_at: :desc)
+      else
+        @posts = Post.where(is_displayed: true).order(created_at: :desc)
+      end
+    end
+
 end

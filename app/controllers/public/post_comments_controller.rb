@@ -9,15 +9,17 @@ class Public::PostCommentsController < ApplicationController
     @post_comment.user = current_user
 
     if @post_comment.save
-      redirect_to post_path(@post), notice: 'コメントが追加されました。'
+      redirect_to post_path(@post)
     else
-      redirect_to post_path(@post), alert: 'コメントの追加に失敗しました。'
+      flash[:alert] = 'コメントの追加に失敗しました。'
+      redirect_to post_path(@post)
     end
   end
 
   def destroy
     @post_comment.destroy
-    redirect_to post_path(@comment.post), notice: 'コメントが削除されました。'
+    flash[:notice] = 'コメントが削除されました。'
+    redirect_to post_path(@comment.post)
   end
 
   private

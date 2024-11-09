@@ -14,18 +14,20 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user # 現在ログインしているユーザーを割り当てる想定
-
     if @post.save
-      redirect_to @post, notice: '投稿が作成されました。'
+      flash[:notice] = '投稿が作成されました。'
+      redirect_to @post
     else
-      render :new, alert: '投稿の作成に失敗しました。'
+      flash[:alert] = '投稿の作成に失敗しました。'
+      render :new
     end
   end
 
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to playground_path(@post.playground), notice: '投稿の削除に成功しました'
+    flash[:notice] = '投稿の削除に成功しました'
+    redirect_to playground_path(@post.playground) 
   end
 
   private

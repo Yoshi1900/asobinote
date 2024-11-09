@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    root to: 'sessions#new', as: :root
+    root to: 'sessions#new', as: :admin_root
     resources :users, only: [:index, :edit, :show, :update, :destroy]
     resources :tags, only: [:index, :edit, :update, :destroy]
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
@@ -39,11 +39,10 @@ Rails.application.routes.draw do
     patch 'users/withdraw' => 'users#withdraw'
     resources :users, only: [:show, :edit, :update] 
     post "guest_sign_in", to: "sessions#guest_sign_in"
+    resources :tags, only: [:show] do
+      get 'playgrounds', to: 'playgrounds#tagged', as: :playgrounds
+    end
+    get 'search', to: 'searches#search', as: 'search'
   end
-
-  get '/search' => 'searches#search'
-
-
-  
 
 end
