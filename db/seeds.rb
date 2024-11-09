@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 
-
+puts "seedの実行を開始"
 Admin.create!(email: "admin@example.jp",
               password:  "123456",
               password_confirmation: "123456",)
@@ -64,3 +64,4 @@ Playground.find_or_create_by!(name: "魚川ファインモール") do |playgroun
   playground.phone_number ="486316184"
 end
 
+puts "seedの実行が完了しました"
