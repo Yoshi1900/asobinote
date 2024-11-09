@@ -8,6 +8,13 @@ class User < ApplicationRecord
   has_many :post_comments, dependent: :destroy 
   has_one_attached :avatar_image
 
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :encrypted_password, presence: true
+  validates :nickname, presence: true, length: { maximum: 20 }
+  validates :introduction, presence: true, length: { maximum: 300 }
+  validates :phone_number, presence: true, uniqueness: true,format: { with: /\A\d{10,11}\z/ }
+
+
   
   def get_avatar_image(width, height)
     unless avatar_image.attached?

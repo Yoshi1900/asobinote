@@ -14,22 +14,22 @@
         メールアドレス
       </div>
       <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.email_field :email, placeholder: "sample@example.com", class: "w-100" %>
+        <%= f.email_field :email, required: true, placeholder: "sample@example.com", class: "w-100" %>
       </div>
     </div>
 
     <div class="form-group row border-bottom">
       <div class="col-5">
-        ニックネーム
+        ニックネーム<span style="font-size: 0.8em; color: gray;">&nbsp;20文字まで</span>
       </div>
       <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.text_field :nickname, class: "w-100" %>
+        <%= f.text_field :nickname, required: true, class: "w-100" %>
       </div>
     </div>
 
     <div class="form-group row border-bottom">
       <div class="col-5">
-       アバター画像<span style="font-size: 0.5em; color: gray;">画像サイズは1MB以下のものを指定してください</span>
+       アバター画像<span style="font-size: 0.8em; color: gray;">&nbsp;画像サイズは1MB以下のものを指定してください</span>
       </div>
       <div class="col-7" style="margin-bottom: 15px;">
         <%= f.file_field :avatar_image %>
@@ -39,7 +39,7 @@
 
     <div class="form-group row border-bottom">
       <div class="col-5">
-        自己紹介
+        自己紹介<span style="font-size: 0.8em; color: gray;">&nbsp;300文字まで</span>
       </div>
       <div class="col-7" style="margin-bottom: 15px;">
         <%= f.text_field :introduction, class: "w-100" %>
@@ -48,10 +48,10 @@
     
     <div class="form-group row border-bottom">
       <div class="col-5">
-        電話番号
+        電話番号<span style="font-size: 0.8em; color: gray;">&nbsp;ハイフンなしの10～11文字</span>
       </div>
       <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.text_field :phone_number, class: "w-100" %>
+        <%= f.text_field :phone_number, required: true, class: "w-100" %>
       </div>
     </div>
 
@@ -63,7 +63,7 @@
         <% end %>
       </div>
       <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.password_field :password, class: "w-100" %>
+        <%= f.password_field :password, required: true, class: "w-100" %>
       </div>
     </div>
 
