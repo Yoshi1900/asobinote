@@ -22,7 +22,8 @@ class Public::UsersController < ApplicationController
     @user.avatar.attach(params[:avatar_image]) if params[:avatar_image].present?
    # パスワードが入力された場合のみ更新
     if user_params[:password].present?
-      if @user.update(user_params)
+      if @user.update(user_params.merge(password: params[:user][:password]))
+        bypass_sign_in(@user)
         flash[:notice] = "プロフィールが更新されました。"
         redirect_to user_path(current_user)
       else
