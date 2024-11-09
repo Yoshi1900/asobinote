@@ -15,6 +15,7 @@
       <div class="col-5">アバター画像</div>
       <div class="col-7" style="margin-bottom: 15px;">
         <%= f.file_field :avatar_image, placeholder: "ファイルを選択", accept: "image/*" %>
+         <div style="font-size: 0.8em; color: gray;">&nbsp;画像サイズは1MB以下</div>
       </div>
     </div>
 
@@ -57,6 +58,7 @@
       <div class="col-5">新しいパスワード</div>
       <div class="col-7" style="margin-bottom: 15px;">
         <%= f.password_field :password, class: "form-control w-100" %>
+        <div style="font-size: 0.8em; color: gray;">変更がなければ空欄のままお進みください</div>
       </div>
     </div>
 
@@ -64,6 +66,8 @@
       <div class="col-5">パスワード確認</div>
       <div class="col-7" style="margin-bottom: 15px;">
         <%= f.password_field :password_confirmation, class: "form-control w-100" %>
+        <div style="font-size: 0.8em; color: gray;">変更がなければ空欄のままお進みください</div>
+
       </div>
     </div>
   </div>
