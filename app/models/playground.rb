@@ -5,6 +5,7 @@ class Playground < ApplicationRecord
   belongs_to :user
   has_many_attached :playground_images
 
+
   # 仮想属性として tag_list を定義
   attr_accessor :tag_list
 
@@ -17,6 +18,7 @@ class Playground < ApplicationRecord
   # 画像のリサイズメソッド
   def get_playground_image(width, height)
     unless playground_images.attached?
+
       file_path = Rails.root.join('app/assets/images/sample-author1.jpg')
       playground_images.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
@@ -66,6 +68,8 @@ class Playground < ApplicationRecord
       tag = Tag.find_or_create_by(name: new_tag) # 既存のタグを検索し、存在しない場合のみ作成
       self.tags << tag unless self.tags.exists?(name: new_tag) # 重複を避けて関連に追加
     end
+
+
   end
 
   def update_tags(tag_names)

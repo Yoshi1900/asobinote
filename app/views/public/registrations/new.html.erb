@@ -29,10 +29,10 @@
 
     <div class="form-group row border-bottom">
       <div class="col-5">
-       アバター画像
+       アバター画像<span style="font-size: 0.5em; color: gray;">画像サイズは1MB以下のものを指定してください</span>
       </div>
       <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.file_field :avatar_image, direct_upload: true %>
+        <%= f.file_field :avatar_image %>
       </div>
     </div>
 
@@ -85,7 +85,7 @@
   <% end %>
 </div>
 
-<div class="row" style="padding:20px;">
+<div class="row">
   <div class="col-4 offset-4" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
     <h5 class="text-center"  style="color: #dc3d26;">既に登録済の方<h5>
   </div>
