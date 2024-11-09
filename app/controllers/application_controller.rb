@@ -35,6 +35,7 @@ class ApplicationController < ActionController::Base
                                                          :nickname, 
                                                          :phone_number, 
                                                          :introduction, 
+                                                         :avatar_image,
                                                          :is_active
                                                          ])
     end
