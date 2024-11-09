@@ -1,2 +1,107 @@
-<h1>Public::Playgrounds#edit</h1>
-<p>Find me in app/views/public/playgrounds/edit.html.erb</p>
+<div class="form-group row" style="padding:20px;">
+  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h2 class="text-center" style="color: #dc3d26;"><%= @playground.name %>の編集</h2>
+  </div>
+</div>
+<%= render 'public/shared/flash' %>
+
+<div class="row justify-content-center min-vh-100">
+  <%= form_with model: @playground, local: true do |f| %>
+    <%= render "public/shared/error_messages", resource: @playground %>
+
+    <div class="row">
+      <!-- 左側のカラム -->
+      <div class="col-md-6">
+        <div class="form-group row border-bottom">
+          <div class="col-5">
+            遊び場名
+          </div>
+          <div class="col-7" style="margin-bottom: 10px;">
+            <%= f.text_field :name, required: true, class: "w-100" %>
+          </div>
+        </div>
+
+        <div class="form-group row border-bottom">
+          <div class="col-5">
+            説明
+          </div>
+          <div class="col-7" style="margin-bottom: 10px;">
+            <%= f.text_area :description, class: "w-100" %>
+          </div>
+        </div>
+
+        <div class="form-group row border-bottom">
+          <div class="col-5">
+            <%= f.label :tag_list, "タグ" %>
+          </div>
+          <div class="col-7" style="margin-bottom: 10px;">
+            <%= f.text_field :tag_list, value: @playground.tags.map(&:name).join(", "), placeholder: "タグをカンマで区切って入力", class: "w-100" %>
+          </div>
+        </div>
+
+        <div class="form-group row border-bottom">
+          <div class="col-5">
+            郵便番号
+          </div>
+          <div class="col-7" style="margin-bottom: 10px;">
+            <%= f.text_field :post_code, class: "w-100" %>
+          </div>
+        </div>
+
+        <div class="form-group row border-bottom">
+          <div class="col-5">
+            住所
+          </div>
+          <div class="col-7" style="margin-bottom: 10px;">
+            <%= f.text_area :address, required: true, class: "w-100" %>
+          </div>
+        </div>
+
+        <div class="form-group row border-bottom">
+          <div class="col-5">
+            電話番号
+          </div>
+          <div class="col-7" style="margin-bottom: 10px;">
+            <%= f.text_field :phone_number, required: true, class: "w-100" %>
+          </div>
+        </div>
+
+        <div class="form-group row border-bottom justify-content-center">
+          <div class="mr-5">
+            <%= f.radio_button :is_active, :true %>
+            <%= f.label :is_active, "営業" %>
+          </div>
+          <div>
+            <%= f.radio_button :is_active, :false %>
+            <%= f.label :is_active, "閉業" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右側のカラム -->
+      <div class="col-md-6">
+        <div class="field">
+          <%= f.label :playground_images, "画像の追加・編集" %>
+          <%= f.file_field :playground_images, multiple: true, direct_upload: true %>
+          <p>※ 既存の画像は以下に表示されます。削除する場合は画像を選択して削除を実行してください。</p>
+          <div class="playground-images">
+            <% @playground.playground_images.each do |image| %>
+              <div class="image-preview">
+                <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "playground-image" %>
+                <%= link_to '削除', remove_image_playground_path(@playground, image_id: image.id), method: :delete, data: { confirm: 'この画像を削除しますか？' } %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 送信ボタンを下中央に配置 -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-auto">
+        <%= f.submit "更新する", class: "btn btn-primary" %>
+        <%= link_to 'キャンセル', playground_path(@playground), class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  <% end %>
+</div>

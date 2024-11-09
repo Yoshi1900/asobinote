@@ -1,8 +1,15 @@
-<div class="search">
-  <%= form_with url: search_path, method: :get, local: true do |f| %>
-    <%= f.text_field :content, placeholder: "検索", class: "search-input" %>
-    <button type="submit" class="btn btn-outline-dark">
-      <i class="fas fa-search"></i>
-    </button>
-  <% end %>
+  <div class="row">
+    <% if user_signed_in? %>
+      <div class="search_form">
+        <%= form_with url: search_path, local: true, method: :get do |f| %>
+          <%= f.text_field :word, placeholder: "検索", class: "search-input" %>
+              <%= f.select :range, options_for_select([['ユーザー'], ['遊び場'],['投稿'], ['タグ'], ['コメント']]) %>
+              <%= f.hidden_field :search, value: "partial_match" %>
+              <button type="submit" class="btn btn-outline-dark">
+              <i class="fas fa-search"></i>
+            </button>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
 </div>

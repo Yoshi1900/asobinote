@@ -3,60 +3,75 @@
     <h3 class="text-center" style="color: #dc3d26;">プロフィール編集</h3>
   </div>
 </div>
-<%= flash[:notice] %>
 <%= render "public/shared/error_messages", resource: @user %>
+<%= render 'public/shared/flash' %>
 
+<div class="row">
+  <%= form_with model: @user, url:user_path do |f| %>
  <div class="row">
-  <%= form_with model: @user, url:edit_user_path do |f| %>
-            <div class="form-group row border-bottom">
-              <div class="col-5">
-                アバター画像
-              </div>
-              <div class="col-7" style="margin-bottom: 15px;">
-                <%= f.file_field :avatar_image, placeholder: "ファイルを選択", accept: "image/*" %>
-              </div>
-            </div>
-
-            <div class="form-group row border-bottom">
-              <div class="col-5">
-                ニックネーム
-              </div>
-              <div class="col-7" style="margin-bottom: 15px;">
-                <%= f.text_field :nickname, class: "form-control", class: "w-100" %>
-              </div>
-            </div>
-
-            <div class="form-group row border-bottom">
-              <div class="col-5">
-                自己紹介
-              </div>
-              <div class="col-7" style="margin-bottom: 15px;">
-                <%= f.text_area :introduction, class: "form-control", class: "w-100" %>
-              </div>
-            </div>
-
-            <div class="form-group row border-bottom">
-              <div class="col-5">
-                電話番号
-              </div>
-              <div class="col-7" style="margin-bottom: 15px;">
-                <%= f.text_field :phone_number, class: "form-control", class: "w-100" %>
-              </div>
-            </div>
-
-            <div class="form-group row border-bottom">
-              <div class="col-5">
-                メールアドレス
-              </div>
-              <div class="col-7" style="margin-bottom: 15px;">
-                <%= f.email_field :email, placeholder: "sample@example.com", class: "w-100" %>
-              </div>
-            </div>
- 
+  <!-- 左側の列 -->
+  <div class="col-xl-5">
+    <div class="form-group row border-bottom">
+      <div class="col-5">アバター画像</div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.file_field :avatar_image, placeholder: "ファイルを選択", accept: "image/*" %>
       </div>
-  <div class="row justify-content-center">
-    <%= f.submit "編集内容を保存", class:"col-2 btn btn-success" %>
-    <%= link_to "退会する", users_unsubscribe_path , class:"btn btn-danger ml-3" %>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">ニックネーム</div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.text_field :nickname, required: true,class: "form-control w-100" %>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">自己紹介</div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.text_area :introduction, class: "form-control w-100" %>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">電話番号</div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.text_field :phone_number,required: true, class: "form-control w-100" %>
+      </div>
+    </div>
   </div>
+
+  <!-- 中央のスペース -->
+  <div class="col-md-2"></div>
+
+  <!-- 右側の列 -->
+  <div class="col-md-5">
+    <div class="form-group row border-bottom">
+      <div class="col-5">メールアドレス</div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.email_field :email,required: true, placeholder: "sample@example.com", class: "w-100" %>
+      </div>
+    </div>
+
+    <!-- パスワード再設定フィールド -->
+    <div class="form-group row border-bottom">
+      <div class="col-5">新しいパスワード</div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.password_field :password, class: "form-control w-100" %>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">パスワード確認</div>
+      <div class="col-7" style="margin-bottom: 15px;">
+        <%= f.password_field :password_confirmation, class: "form-control w-100" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="row justify-content-center">
+      <%= f.submit "編集内容を保存", class: "col-4 btn btn-success" %>
+      <%= link_to "退会する", users_unsubscribe_path, class: "btn btn-danger ml-3" %>
+    </div>
   <% end %>
 </div>

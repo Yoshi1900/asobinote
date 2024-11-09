@@ -1,0 +1,26 @@
+<h1><%= @tag.name %>に関連する遊び場</h1> <!-- タグ名を表示 -->
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>遊び場名</th>
+      <th>住所</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @playgrounds.each do |playground| %>
+      <tr>
+        <td>
+          <% if playground.playground_images.attached? %>
+            <%= image_tag playground.playground_images.first.variant(resize_to_limit: [50, 50]), class: "thumbnail" %>
+          <% end %>
+        </td>
+        <td><%= link_to playground.name, playground_path(playground) %></td> <!-- Playgroundの詳細ページリンク -->
+        <td><%= playground.address %></td>
+        <td><%= playground.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

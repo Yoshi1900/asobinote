@@ -1,4 +1,5 @@
 class Admin::PostCommentsController < ApplicationController
+  before_action :authenticate_admin!
   
   def create
     posts = Post.find(params[:post_id])

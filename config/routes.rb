@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    root to: 'admin#home'
+    root to: 'sessions#new', as: :admin_root
     resources :users, only: [:index, :edit, :show, :update, :destroy]
     resources :tags, only: [:index, :edit, :update, :destroy]
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
@@ -29,19 +29,20 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :new, :show, :create, :destroy] do
       resources :post_comments, only: [:create,:destroy]
     end
-    resources :playgrounds, only: [:new, :index, :show, :create, :edit, :update, :destroy]
+    resources :playgrounds, only: [:new, :index, :show, :create, :edit, :update]do
+      member do
+        delete :remove_image
+      end
+    end
     get '/mypage' => 'users#mypage'
-    get 'users/information/edit' => 'users#edit'
-    patch 'users/information' => 'users#update'
     get 'users/unsubscribe' => 'users#unsubscribe'
     patch 'users/withdraw' => 'users#withdraw'
     resources :users, only: [:show, :edit, :update] 
     post "guest_sign_in", to: "sessions#guest_sign_in"
+    resources :tags, only: [:show] do
+      get 'playgrounds', to: 'playgrounds#tagged', as: :playgrounds
+    end
+    get 'search', to: 'searches#search', as: 'search'
   end
-
-  get '/search' => 'searches#search'
-
-
-  
 
 end
