@@ -64,10 +64,17 @@ footer {
   gap: 10px;
 }
 
+.image-preview {
+  text-align: center;
+}
+
 .playground-image {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 5px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px
 }
 
 .post-images {

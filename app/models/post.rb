@@ -4,7 +4,8 @@ class Post < ApplicationRecord
     has_many :post_comments, dependent: :destroy
     has_many_attached :post_images
 
-
+    validates :title, presence: true, length: { maximum: 50 }
+    validates :body, presence: true, length: { maximum: 300 }
     validate :image_count_within_limit
 
     def get_post_image(width, height)

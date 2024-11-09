@@ -17,6 +17,7 @@
         </div>
         <div class="col-8" style="margin-bottom: 10px;">
           <%= f.text_field :title, required: true %>
+          <small>50文字まで</small>
         </div>
       </div>
 
@@ -26,6 +27,7 @@
         </div>
         <div class="col-8" style="margin-bottom: 10px;">
           <%= f.text_area :body, required: true, class: "w-100" %>
+          <small>500文字まで</small>
         </div>
       </div>
 
@@ -35,7 +37,7 @@
       </div>
       <div class="col-8" style="margin-bottom: 10px;">
         <%= f.file_field :post_images, multiple: true, direct_upload: true %></br>
-        <small>1MB以下で最大5枚まで</small>
+        <small>1MB以下で最大8枚まで</small>
       </div>
     </div>
 
@@ -78,6 +80,10 @@
 
     <div class="actions">
       <%= f.submit "この遊び場に新規投稿" %>
+      <div>
+        <small>投稿の編集はできません。</small>
+        <small>再投稿されたい場合は、削除後新たに投稿をお願いします。</small>
+      </div>
     </div>
   <% end %>
 </div>

@@ -41,27 +41,18 @@
       <!--  playgroundの投稿一覧 -->
       <h3>投稿一覧</h3>
       <table class="table table-striped">
-        <thead>
-          <tr>
-            <th></th>
-            <th>タイトル</th>
-            <th>本文</th>
-            <th>評価</th>
-          </tr>
-        </thead>
         <tbody>
             <% @playground.posts.each do |playground_post| %> 
             <tr>
               <td>
                 <% if playground_post.post_images.attached? %>
                   <%= image_tag playground_post.post_images.first.variant(resize_to_limit: [100, 100]), class: "thumbnail" %>
+                <% else %>
+                  <span>画像はありません</span>
                 <% end %>
               </td>
               <td>
                 <%= link_to playground_post.title, post_path(playground_post) %>
-              </td>
-              <td>
-                <%= truncate(playground_post.body, length: 50) %>
               </td>
               <td>
                 <%= render "/public/posts/static_rate", post: playground_post %>

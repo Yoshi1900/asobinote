@@ -5,12 +5,14 @@ class Playground < ApplicationRecord
   belongs_to :user
   has_many_attached :playground_images
 
+  validates :name, presence: true, length: { maximum: 30 }
+  validates :description, presence: true, length: { maximum: 300 }
+  validates :phone_number, presence: true, uniqueness: true,format: { with: /\A\d{10,11}\z/ }
+  validate :image_count_within_limit
+
 
   # 仮想属性として tag_list を定義
   attr_accessor :tag_list
-
-  # バリデーション
-  validate :image_count_within_limit
 
   # タグの保存処理を after_save で実行
   after_save :save_tags_from_list
