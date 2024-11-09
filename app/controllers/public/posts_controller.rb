@@ -19,7 +19,7 @@ class Public::PostsController < ApplicationController
       redirect_to @post
     else
       flash[:alert] = '投稿の作成に失敗しました。'
-      render :new
+      redirect_to playground_path(@post.playground)
     end
   end
 
