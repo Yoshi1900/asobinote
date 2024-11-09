@@ -4,10 +4,10 @@
 # Examples:
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-# Admin.create!(email: "admin@example.jp",
-#               password:  "123456",
-#               password_confirmation: "123456",)
+
+Admin.create!(email: "admin@example.jp",
+              password:  "123456",
+              password_confirmation: "123456",)
 
 olivia = User.find_or_create_by!(email: "olivia@example.com") do |user|
   user.nickname = "Olivia"
@@ -34,7 +34,7 @@ lucas = User.find_or_create_by!(email: "lucas@example.com") do |user|
 end
 
 Playground.find_or_create_by!(name: "大城遊園地") do |playground|
-  playground.playground_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/playground1.jpg"), filename:"playground1.jpg")
+  playground.playground_images = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/playground1.jpg"), filename:"playground1.jpg")
   playground.description = "大人気の遊園地"
   playground.post_code = "1111111"
   playground.address = "富山県高岡市大城町123-12"
@@ -55,3 +55,4 @@ Playground.find_or_create_by!(name: "魚川ファインモール") do |playgroun
   playground.post_code = "3333333"
   playground.address = "富山県魚川立浪町784-32"
   playground.phone_number ="486316184"
+end

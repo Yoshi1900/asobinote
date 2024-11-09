@@ -6,6 +6,12 @@
   <div class="row">
     <div class="col-4 ">
       <p><strong>説明:</strong> <%= @playground.description %></p>
+      <p>
+        <strong>タグ:</strong> 
+        <% @playground.tags.each_with_index do |tag, index| %>
+          <%= link_to tag.name, tag_path(tag) %><%= ", " unless index == @playground.tags.size - 1 %>
+        <% end %>
+      </p>
       <p><strong>郵便番号:</strong> <%= @playground.post_code %></p>
       <p><strong>住所:</strong> <%= @playground.address %></p>
       <p><strong>電話番号:</strong> <%= @playground.phone_number %></p>
@@ -27,6 +33,7 @@
   
     <!-- 新規投稿の部分テンプレート -->
     <div class="col-4">
+    <%= render 'public/shared/flash' %>
       <%= render "/public/posts/new", post: @post, playground: @playground %>
     </div> 
 

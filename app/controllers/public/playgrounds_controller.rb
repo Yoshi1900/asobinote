@@ -4,27 +4,39 @@ class Public::PlaygroundsController < ApplicationController
   end
 
   def index
-    @playgrounds = Playground.all
+    @playgrounds = @playgrounds = Playground.where(is_active: true).order(created_at: :desc)
     @playgrounds_pages = Playground.page(params[:page]).per(5)
+  end
+  
+  def tagged
+    # パラメータからタグを見つけ、そのタグに紐づいたPlaygroundを取得
+    @tag = Tag.find(params[:tag_id])
+    @playgrounds = @tag.playgrounds
   end
 
   def show
     @playground = Playground.find(params[:id])  
     @playgrounds_pages =@playground.posts.page(params[:page]).per(5)
     @post = Post.new
+    @tags = @playground.tags.pluck(:name).join(',')
+
   end
 
   def edit
     @playground = Playground.find(params[:id])
+    @tags = @playground.tags.pluck(:name).join(',')
   end
   
   def update
     @playground = Playground.find(params[:id])
+    tags = params[:playground][:tag_id].present? ? params[:playground][:tag_id].split(/[,\s;:#\u3000\uFF1A\uFF0C\uFF03]+/).map(&:strip) : []
     if playground_params[:images].present?
       @playground.images.attach(playground_params[:images]) # 既存の画像を保持しつつ新しい画像を追加
     end
     if @playground.update(playground_params.except(:images)) # 画像以外の属性を更新
-      redirect_to @playground, notice: 'Playground was successfully updated.'
+      @playground.update_tags(tags)
+      flash[:notice] = '遊び場が更新されました。'
+      redirect_to @playground
     else
       render :edit
     end
@@ -33,8 +45,10 @@ class Public::PlaygroundsController < ApplicationController
   def create
     @playground = Playground.new(playground_params)
     @user = current_user
+    tags = params[:playground][:tag_id].present? ? params[:playground][:tag_id].split(/[,\s;:#\u3000\uFF1A\uFF0C\uFF03]+/).map(&:strip) : []
     if @playground.save
-      redirect_to @playground, notice: 'Playground was successfully created.'
+      flash[:notice] = '遊び場が作成されました。'
+      redirect_to @playground
     else
       render :new
     end
@@ -46,9 +60,11 @@ class Public::PlaygroundsController < ApplicationController
   
     if image
       image.purge
-      redirect_to edit_playground_path(@playground), notice: '画像が削除されました。'
+       flash[:notice] = '画像が削除されました。'
+      redirect_to edit_playground_path(@playground)
     else
-      redirect_to edit_playground_path(@playground), alert: '画像が見つかりませんでした。'
+      flash[:alert] = '画像が見つかりませんでした。'
+      redirect_to edit_playground_path(@playground)
     end
   end  
 
@@ -64,6 +80,7 @@ class Public::PlaygroundsController < ApplicationController
                                         :phone_number, 
                                         :is_active, 
                                         :user_id,
+                                        :tag_list, 
                                          playground_images: [])
   end
 

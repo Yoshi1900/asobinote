@@ -3,8 +3,8 @@
     <h3 class="text-center" style="color: #dc3d26;">プロフィール編集</h3>
   </div>
 </div>
-<%= flash[:notice] %>
 <%= render "public/shared/error_messages", resource: @user %>
+<%= render 'public/shared/flash' %>
 
 <div class="row">
   <%= form_with model: @user, url:user_path do |f| %>

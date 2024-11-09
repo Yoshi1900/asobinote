@@ -23,16 +23,20 @@ class Public::UsersController < ApplicationController
    # パスワードが入力された場合のみ更新
     if user_params[:password].present?
       if @user.update(user_params)
-        redirect_to user_path(current_user), notice: "プロフィールが更新されました。"
+        flash[:notice] = "プロフィールが更新されました。"
+        redirect_to user_path(current_user)
       else
-        render :edit, alert: "プロフィールの更新に失敗しました。"
+        flash[:alert] = "プロフィールの更新に失敗しました。"
+        render :edit
       end
     else
       # パスワードが空の場合、パスワード以外の情報のみ更新
       if @user.update(user_params.except(:password, :password_confirmation))
-        redirect_to user_path(current_user), notice: "プロフィールが更新されました。"
+        flash[:notice] = "プロフィールが更新されました。"
+        redirect_to user_path(current_user)
       else
-        render :edit, alert: "プロフィールの更新に失敗しました。"
+        flash[:alert] = "プロフィールの更新に失敗しました。"
+        render :edit
       end
     end
   end
