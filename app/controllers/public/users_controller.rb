@@ -1,16 +1,17 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:mypage, :edit, :update]
+  before_action :authenticate_user!, only: [:mypage, :show, :edit, :update]
   before_action :set_user, only: [:show, :edit, :update]
   before_action :ensure_guest_user, only: [:edit]
   
 
   def edit
     unless @user == current_user
-      redirect_to user_path(@user) #ログインユーザー以外のページだとマイページにリダイレクト
+      redirect_to mypage_path #ログインユーザー以外のページだとマイページにリダイレクト
     end
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def mypage
@@ -18,6 +19,9 @@ class Public::UsersController < ApplicationController
   end
 
   def update
+    unless @user == current_user
+      redirect_to user_path(@user) #ログインユーザー以外のページだとマイページにリダイレクト
+    end
     @user = current_user
     @user.avatar.attach(params[:avatar_image]) if params[:avatar_image].present?
    # パスワードが入力された場合のみ更新
