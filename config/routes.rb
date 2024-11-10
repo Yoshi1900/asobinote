@@ -34,7 +34,7 @@ Rails.application.routes.draw do
         delete :remove_image
       end
     end
-    get '/mypage' => 'users#mypage'
+    get '/mypage' => 'users#mypage', as: :mypage
     get 'users/unsubscribe' => 'users#unsubscribe'
     patch 'users/withdraw' => 'users#withdraw'
     resources :users, only: [:show, :edit, :update] 
