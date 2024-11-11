@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
       end
     end
   
+    def after_sign_out_path_for(resource_or_scope)
+      about_path # サインアウト後に遷移するページを指定
+    end
+
     def search
       @range = params[:range]
   
@@ -27,6 +31,11 @@ class ApplicationController < ActionController::Base
       end
     end
   
+  # タグ文字列を空白や記号で分割し、クリーンな配列に変換するヘルパーメソッド
+  def parse_tags(tag_string)
+    tag_string.present? ? tag_string.split(/[,\s;:#\u3000\uFF1A\uFF0C\uFF03]+/).map(&:strip) : []
+  end
+
   protected
   
     def configure_permitted_parameters

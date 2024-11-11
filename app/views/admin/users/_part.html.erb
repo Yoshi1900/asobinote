@@ -1,0 +1,47 @@
+
+
+    <div style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+      <h4 class="text-center" style="color: #dc3d26;"><%= user.nickname %>さん</h4>
+    </div>
+
+
+<div class="profile">
+  <% if user.avatar_image.present? %>
+    <%= image_tag user.get_avatar_image(100,100), class: "profile-avatar" %>
+  <% end %>
+  
+  <div class="profile-item">
+    <span class="profile-label">ニックネーム:</span>
+    <span class="profile-content"><%= user.nickname %></span>
+  </div>
+  
+  <div class="profile-item">
+    <span class="profile-label">自己紹介:</span>
+    <span class="profile-content"><%= user.introduction %></span>
+  </div>
+
+  <div class="profile-item">
+    <span class="profile-label">メールアドレス:</span>
+    <span class="profile-content"><%= user.email %></span>
+  </div>
+
+  <div class="profile-item">
+    <span class="profile-label">電話番号:</span>
+    <span class="profile-content"><%= user.phone_number %></span>
+  </div>
+
+  <div class="profile-item">
+    <span class="profile-label">ステータス:</span>
+    <span class="profile-content">
+      <% if @user.is_active == true %>
+        <div class="text-success font-weight-bolder">有効</div>
+      <% else %>
+        <div class="text-muted font-weight-bolder">退会</div>
+      <% end %>
+    </span>
+  </div>
+
+</div>
+
+<%= link_to "編集", edit_admin_user_path(user), class: "btn btn-primary" %>
+<%= link_to "削除", admin_user_path(user), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
