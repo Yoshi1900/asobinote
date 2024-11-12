@@ -1,6 +1,21 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
+
+  # 管理者の認証用メソッド
+  def authenticate_admin!
+    unless admin_signed_in?
+      flash[:alert] ="管理者としてログインしてください。"
+      redirect_to new_admin_session_path
+    end
+  end
+
+  # 通常ユーザーの認証用メソッド
+  def authenticate_user!
+    unless user_signed_in?
+      flash[:alert] = "ログインしてください。"
+      redirect_to new_user_session_path
+    end
+  end
     def after_sign_in_path_for(resource)
       case resource
         when Admin
@@ -10,9 +25,11 @@ class ApplicationController < ActionController::Base
       end
     end
   
+
     def after_sign_out_path_for(resource_or_scope)
       about_path # サインアウト後に遷移するページを指定
     end
+
 
     def search
       @range = params[:range]

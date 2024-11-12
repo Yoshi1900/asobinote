@@ -1,4 +1,5 @@
 class Public::PlaygroundsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :show, :edit, :update]
   def new
     @playground = Playground.new
   end
