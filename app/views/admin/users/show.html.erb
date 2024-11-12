@@ -1,2 +1,39 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<p id="notice"></p>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+    <%= render 'public/shared/flash' %>
+      <%= render 'part', user: @user %>
+      <!-- 部分テンプレート -->
+    </div>
+
+    <div class="col-md-9 ">
+      <h2>投稿一覧</h2>
+      <table class="table ">
+        <tr>
+          <th></th><th>タイトル</th><th></th><th></th>
+        </tr>
+        <% @user.posts.each do |post| %>
+          <tr>
+            <td style="padding-right: 5px;">
+              <% if post.post_images.attached? %>
+                <% post.post_images.first(3).each do |image| %>
+                  <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "thumbnail" %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to post_path(post) do %><%= post.title %><% end %>
+            </td>
+            <td>
+              <%= truncate(post.body, length: 50) %>
+            </td>
+            <td>
+                <%= link_to '削除', admin_post(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+   </div>
+  </div>

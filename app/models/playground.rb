@@ -2,7 +2,7 @@ class Playground < ApplicationRecord
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
   has_many :posts, dependent: :destroy
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many_attached :playground_images
 
   validates :name, presence: true, length: { maximum: 30 }

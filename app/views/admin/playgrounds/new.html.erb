@@ -1,2 +1,88 @@
-<h1>Admin::Playgrounds#new</h1>
-<p>Find me in app/views/admin/playgrounds/new.html.erb</p>
+<div class="form-group row" style="padding:20px;">
+  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h2 class="text-center" style="color: #dc3d26;">新しい遊び場登録</h2>
+  </div>
+</div>
+<%= render 'public/shared/flash' %>
+
+<div class="px-5">
+  <%= form_with model: @playground, local: true do |f| %>
+    <%= render "public/shared/error_messages", resource: @playground %>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5 d-flex align-items-center">
+        <span>遊び場名</span>
+        <span class="ml-2" style="font-size: 0.8rem; gray;">20文字まで</span>
+      </div>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.text_field :name, required: true, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5 d-flex align-items-center">
+        <span>説明</span>
+        <span class="ml-2" style="font-size: 0.8rem; gray;">300文字まで</span>
+      </div>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.text_area :description, required: true, class: "w-100" %>
+      </div>
+    </div>
+    
+    <div class="form-group row border-bottom">
+      <div class="col-5 d-flex align-items-center">
+        <span>タグ</span>
+        <span class="ml-2" style="font-size: 0.8rem; gray;">全角のカンマかスペース、＃で区切ってください</span>
+      </div>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.text_field :tag_list, value: @playground.tags.map(&:name).join(", "), placeholder: "全角のカンマかスペース、＃で区切ってください", class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5 d-flex align-items-center">
+        <span>画像</span>
+        <span class="ml-2" style="font-size: 0.8rem; gray;">1枚1Mサイズ以下合計8枚まで</span>
+      </div>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.file_field :playground_images, multiple: true, direct_upload: true %>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        郵便番号
+      </div>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.text_field :post_code, required: true, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="form-group row border-bottom">
+      <div class="col-5">
+        住所
+      </div>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.text_area :address, required: true, class: "w-100" %>
+      </div>
+    </div>
+    
+    <div class="form-group row border-bottom">
+      <div class="col-5 d-flex align-items-center">
+        <span>電話番号</span>
+        <span class="ml-2" style="font-size: 0.8rem; gray;">ハイフンなしの10～11文</span>
+      </div>
+      <div class="col-7" style="margin-bottom: 10px;">
+        <%= f.text_field :phone_number, required: true, class: "w-100" %>
+      </div>
+    </div>
+    
+    <%= f.hidden_field :is_active, value: "true" %>
+
+    <div class="row" style="padding-bottom:20px;">
+      <div class="col-12 text-center">
+        <%= f.submit "遊び場登録", class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+</div>

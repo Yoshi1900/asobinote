@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+  before_action :reject_user, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -34,7 +35,7 @@ class Public::SessionsController < Devise::SessionsController
   protected
 
   # ユーザーの論理削除のための記述。退会後は、同じアカウントでは利用できない。
-  def reject_customer
+  def reject_user
     @user = User.find_by(email: params[:user][:email])
     if @user.present?
       if @user.valid_password?(params[:user][:password]) && (@user.is_active == false)
