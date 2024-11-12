@@ -43,9 +43,6 @@ class Public::UsersController < ApplicationController
     end
   end
 
-  def unsubscribe
-  end
-
   def withdraw
     @user = current_user
     @user.update(is_active: false)
