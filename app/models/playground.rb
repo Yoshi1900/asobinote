@@ -79,7 +79,8 @@ class Playground < ApplicationRecord
   def update_tags(tag_names)
     return unless tag_names.present?
     # タグの重複を排除
-    tag_names = tag_names.uniq
+    tag_names = tag_names.split(",") if tag_names.is_a?(String)
+    tag_names = tag_names.map(&:strip).uniq
   
     # 現在のタグ名のリストを取得
     current_tags = self.tags.pluck(:name)

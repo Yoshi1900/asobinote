@@ -12,21 +12,35 @@
     <div>
       <p><strong>タイトル:</strong> <%= @post.title %></p>
       <p><strong>本文:</strong> <%= @post.body %></p>
+      <p>
+        <strong>タグ:</strong> 
+        <% @post.tags.each_with_index do |tag, index| %>
+          <%= link_to tag.name, tag_path(tag) %><%= ", " unless index == @post.tags.size - 1 %>
+        <% end %>
+      </p>
+      <p><strong>遊び場:</strong> <%= link_to @post.playground.name, admin_playground_path(@post.playground) %></p>
+      <p>
+      <p><strong>投稿者:</strong> <%= link_to @post.user.nickname, admin_user_path(@post.user) %></p>
       <p><strong>評価:</strong><%= render "public/posts/static_rate", post: @post %></p>
+      <%= link_to '編集する', edit_admin_post_path(@post), class: 'btn btn-primary' %>
       <%= link_to '削除する', admin_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
       <%= link_to '遊び場に戻る', admin_playground_path(@post.playground), class: 'btn btn-secondary' %>
     </div>
   </div>
 
   <div class="col-5 mt-3">
-  <%= render 'public/shared/flash' %>
+    <%= render 'public/shared/flash' %>
     <div class="flex">
       <h4>コメント<div style="font-size: 14px;"><%= @post.post_comments.count %>件</div></h4>
     </div>
     <% @post.post_comments.each do |post_comment| %>
       <div class="row comment">
-        <p><strong><%= post_comment.user.nickname %></strong>: <%= post_comment.comment %></p>
+        <div class="col-11">
+          <p><strong><%= link_to post_comment.user.nickname, user_path(post_comment.user) %></strong>: <%= post_comment.comment %></p>
+        </div>
+        <div class="col-1 ml-auto text-right">
           <%= link_to '削除', admin_post_post_comment_path(@post, post_comment), method: :delete, data: { confirm: 'コメントを削除してもよろしいですか？' }, class: 'btn btn-danger btn-sm' %>
+        </div>
       </div>
     <% end %>
   </div>

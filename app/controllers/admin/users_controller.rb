@@ -14,13 +14,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
+    @user = User.find(params[:id])
     @user.avatar.attach(params[:avatar_image]) if params[:avatar_image].present?
   
     if @user.update(user_params)
-      bypass_sign_in(@user)
       flash[:notice] = "プロフィールが更新されました。"
-      redirect_to user_path(current_user)
+      redirect_to admin_user_path(@user)
     else
       flash[:alert] = "プロフィールの更新に失敗しました。"
       render :edit
@@ -46,6 +45,7 @@ def user_params
                                :introduction, 
                                :phone_number, 
                                :email,
+                               :is_active,
                                :password, 
                                :password_confirmation,
                                :avatar_image)

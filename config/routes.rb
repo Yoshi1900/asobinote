@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:index, :edit, :update, :destroy]
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
       resources :post_comments, only: [:create,:destroy]
+      delete 'remove_image', on: :member
     end
     resources :tags, only: [:index]
     resources :playgrounds, only: [:index, :new, :create, :show, :edit, :update, :destroy]

@@ -1,2 +1,94 @@
-<h1>Admin::Posts#edit</h1>
-<p>Find me in app/views/admin/posts/edit.html.erb</p>
+<div class="form-group row" style="padding:20px;">
+  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h2 class="text-center" style="color: #dc3d26;"><%= @post.title %>の編集</h2>
+  </div>
+</div>
+<%= render 'public/shared/flash' %>
+
+<div class="row justify-content-center min-vh-100">
+  <%= form_with model: @post, url: admin_post_path(@post), method: :patch, local: true do |f| %>
+    <%= render "public/shared/error_messages", resource: @post %>
+
+    <div class="row">
+      <!-- 左側のカラム -->
+      <div class="col-md-6">
+        <div class="form-group row border-bottom">
+          <div class="col-5 d-flex align-items-center">
+            <span>タイトル</span>
+            <span class="ml-2" style="font-size: 0.8rem; gray;">50文字まで</span>
+          </div>
+          <div class="col-7" style="margin-bottom: 10px;">
+            <%= f.text_field :title, required: true, class: "w-100" %>
+          </div>
+        </div>
+
+        <div class="form-group row border-bottom">
+          <div class="col-5 d-flex align-items-center">
+            <span>本文</span>
+            <span class="ml-2" style="font-size: 0.8rem; gray;">500文字まで</span>
+          </div>
+          <div class="col-7" style="margin-bottom: 10px;">
+            <%= f.text_area :body, required: true, class: "w-100" %>
+          </div>
+        </div>
+
+        <div class="form-group row border-bottom">
+          <div class="col-5">
+            <span>評価</span>
+          </div>
+          <div class="col-7" style="margin-bottom: 10px;">
+            <%= f.number_field :star, step: 0.5, min: 0, max: 5, class: "w-100" %>
+          </div>
+        </div>
+
+        <div class="form-group row border-bottom">
+          <div class="col-2 d-flex align-items-center">
+            <span>タグ</span>
+          </div>
+          <div class="col-3 d-flex align-items-center">
+            <span class="ml-2" style="font-size: 0.8rem; gray;">全角のカンマかスペース、＃で区切ってください</span>
+          </div>
+          <div class="col-7" style="margin-bottom: 10px;">
+            <%= f.text_field :tag_list, value: @post.tags.map(&:name).join(", "), placeholder: "タグをカンマかスペースで区切って入力", class: "w-100" %>
+          </div>
+        </div>
+        <div class="form-group row border-bottom justify-content-center">
+          <div class="col-5">ステータス</div>
+          <div class="col-7" style="margin-bottom: 15px;">
+            <%= f.radio_button :is_displayed, :true %>
+            <%= f.label :is_deleted, "表示"  %>
+            <%= f.radio_button :is_displayed, :false %>
+            <%= f.label :is_deleted, "非表示" %>
+          </div>
+        </div> 
+      </div>
+
+      <!-- 右側のカラム -->
+      <div class="col-md-6">
+        <div class="field">
+          <%= f.label :post_images, "画像の追加・編集" %>
+          <%= f.file_field :post_images, multiple: true, direct_upload: true %>
+          <p>※ 既存の画像は以下に表示されます。削除する場合は画像を選択して削除を実行してください。</p>
+          <div class="post-images">
+            <% @post.post_images.each do |image| %>
+              <div class="image-preview">
+                <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "post-image" %>
+               <%= link_to '削除', remove_image_admin_post_path(@post, image_id: image.id), method: :delete, data: { confirm: 'この画像を削除しますか？' } %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- 送信ボタンを下中央に配置 -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-auto">
+        <%= f.submit "更新する", class: "btn btn-primary" %>
+        <%= link_to 'キャンセル', post_path(@post), class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  <% end %>
+</div>
