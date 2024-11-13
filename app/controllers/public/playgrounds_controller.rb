@@ -78,12 +78,15 @@ class Public::PlaygroundsController < ApplicationController
   def playground_params
     params.require(:playground).permit(:name, 
                                        :description,
+                                       :tag_list,
                                        :post_code, 
                                        :address, 
                                        :phone_number, 
                                        :is_active, 
                                        :user_id,
-                                       playground_images: [])
+                                       playground_images: []).tap do |playground_params|
+                                        playground_params[:user_id] = current_user.id if current_user.present?
+                                      end
   end
 
 

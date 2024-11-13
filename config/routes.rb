@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get 'tags/index'
+  end
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -19,6 +22,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
       resources :post_comments, only: [:create,:destroy]
     end
+    resources :tags, only: [:index]
     resources :playgrounds, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   end
   
@@ -34,6 +38,7 @@ Rails.application.routes.draw do
         delete :remove_image
       end
     end
+    resources :tags, only: [:index]
     get '/mypage' => 'users#mypage', as: :mypage
     get 'users/unsubscribe' => 'users#unsubscribe'
     patch 'users/withdraw' => 'users#withdraw'

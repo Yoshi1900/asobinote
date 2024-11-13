@@ -1,5 +1,4 @@
 class Public::PostCommentsController < ApplicationController
-  before_action :set_post_comment, only: :destroy
   before_action :authenticate_user!
   before_action :authorize_user!, only: :destroy
 
@@ -17,16 +16,13 @@ class Public::PostCommentsController < ApplicationController
   end
 
   def destroy
+    @post_comment = PostComment.find(params[:id])
     @post_comment.destroy
     flash[:notice] = 'コメントが削除されました。'
     redirect_to post_path(@post_comment.post)
   end
 
   private
-
-  def set_post_comment
-    @post_comment = PostComment.find(params[:id])
-  end
 
   def post_comment_params
     params.require(:post_comment).permit(:comment,

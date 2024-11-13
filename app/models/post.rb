@@ -3,8 +3,8 @@ class Post < ApplicationRecord
     belongs_to :user
     has_many :post_comments, dependent: :destroy
     has_many_attached :post_images
-    has_many :taggings
-    has_many :tags, through: :taggings
+    has_many :post_taggings
+    has_many :tags, through: :post_taggings
     
     validates :title, presence: true, length: { maximum: 50 }
     validates :body, presence: true, length: { maximum: 300 }
@@ -49,13 +49,11 @@ class Post < ApplicationRecord
         tag = Tag.find_or_create_by(name: new_tag) # 既存のタグを検索し、存在しない場合のみ作成
         self.tags << tag unless self.tags.exists?(name: new_tag) # 重複を避けて関連に追加
       end
-  
-  
     end
   
     def update_tags(tag_names)
       # タグの重複を排除
-      tag_names = tag_list.split(/[,\s;:#\u3000\uFF1A\uFF0C\uFF03]+/).map(&:strip).uniq
+      tag_names = tag_names.uniq
     
       # 現在のタグ名のリストを取得
       current_tags = self.tags.pluck(:name)

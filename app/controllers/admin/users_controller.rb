@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
   def index
-    @users = User.all
+    @users = User.order(created_at: :desc)
     @users = User.page(params[:page]).per(10)
   end
 
@@ -37,4 +37,18 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_user_path(@user)
   end
 end
+
+private
+
+
+def user_params
+  params.require(:user).permit(:nickname,
+                               :introduction, 
+                               :phone_number, 
+                               :email,
+                               :password, 
+                               :password_confirmation,
+                               :avatar_image)
+end
+
 end
