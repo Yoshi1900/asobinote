@@ -64,7 +64,7 @@ class Admin::PlaygroundsController < ApplicationController
   def playground_params
     params.require(:playground).permit(:name, 
                                        :description,
-                                       :tag_list
+                                       :tag_list,
                                        :post_code, 
                                        :address, 
                                        :phone_number, 
