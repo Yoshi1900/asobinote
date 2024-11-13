@@ -40,7 +40,7 @@
               <span class="ml-2" style="font-size: 0.8rem; gray;">全角のカンマかスペース、＃で区切ってください</span>
             </div>
             <div class="col-7" style="margin-bottom: 10px;">
-            <%= f.text_field :tag_list, value: @playground.tags.map(&:name).join(", "), placeholder: "タグをカンマで区切って入力", class: "w-100" %>
+            <%= f.text_field :tag_list, value: @playground.tags.map(&:name).join(", "), placeholder: "タグをカンマかスペースで区切って入力", class: "w-100" %>
           </div>
         </div>
 

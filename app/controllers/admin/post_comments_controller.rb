@@ -1,26 +1,22 @@
 class Admin::PostCommentsController < ApplicationController
   before_action :authenticate_admin!
   
-  def create
-    posts = Post.find(params[:post_id])
-    comment = current_user.post_comments.new(post_comment_params)
-    comment.post_id = post_id
-    comment.save
-    redirect_to post_path(posts)
-  end
 
   def destroy
-    posts = Post.find(params[:post_id])
-    comment = Comment.find(params[:gurume_id])
-    comment.destroy
-    redirect_to post_path(posts)
+    @post_comment = PostComment.find(params[:id])
+    @post_comment.destroy
+    flash[:notice] = 'コメントが削除されました。'
+    redirect_to admin_post_path(@post_comment.post)
   end
 
 
   private
 
   def post_comment_params
-    params.require(:post_comment).permit(:comment)
+    params.require(:post_comment).permit(:comment,
+                                         :user_id,
+                                         :post_id
+                                        )
   end
   
 end

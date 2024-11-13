@@ -1,2 +1,64 @@
-<h1>Admin::Playgrounds#show</h1>
-<p>Find me in app/views/admin/playgrounds/show.html.erb</p>
+<div class="form-group row" style="padding:20px;">
+  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h2 class="text-center" style="color: #dc3d26;"><%= @playground.name %>の情報</h2>
+  </div>
+</div>
+  <div class="row">
+    <div class="col-4 ">
+      <p><strong>説明:</strong> <%= @playground.description %></p>
+      <p>
+        <strong>タグ:</strong> 
+        <% @playground.tags.each_with_index do |tag, index| %>
+          <%= link_to tag.name, tag_path(tag) %><%= ", " unless index == @playground.tags.size - 1 %>
+        <% end %>
+      </p>
+      <p><strong>郵便番号:</strong> <%= @playground.post_code %></p>
+      <p><strong>住所:</strong> <%= @playground.address %></p>
+      <p><strong>電話番号:</strong> <%= @playground.phone_number %></p>
+      <p><strong>ステータス:</strong> <%= @playground.is_active ? "営業" : "閉業" %></p>
+      <div style="display: flex;"><strong>評価:</strong> <%= @playground.posts.count %>件<%= render "/public/playgrounds/average_rate.html.erb", playground: @playground %></div>
+      <div class="my-3">
+        <%= link_to '編集', edit_admin_playground_path(@playground), class: 'btn btn-primary' %>
+        <%= link_to 'この遊び場の削除', admin_playground_path(@playground), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger'  %>
+      </div>
+    </div>
+    <div class="col-8 playground-images">
+      <% if @playground.playground_images.attached? %>
+         <% @playground.playground_images.each do |image| %>
+          <%= image_tag image, class: "playground-image", size: "200x150" %>
+        <% end %>
+      <% else %>
+        <p>画像がありません</p>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <!--  playgroundの投稿一覧 -->
+      <h3>投稿一覧</h3>
+      <table class="table table-striped">
+        <tbody>
+            <% @playground.posts.each do |playground_post| %> 
+            <tr>
+              <td>
+                <% if playground_post.post_images.attached? %>
+                  <%= image_tag playground_post.post_images.first.variant(resize_to_limit: [100, 100]), class: "thumbnail" %>
+                <% else %>
+                  <span>画像はありません</span>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to playground_post.title, admin_post_path(playground_post) %>
+              </td>
+              <td>
+                <%= render "/public/posts/static_rate", post: playground_post %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <%= paginate @playgrounds %>
+    
+  </div>

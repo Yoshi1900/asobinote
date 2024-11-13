@@ -32,6 +32,8 @@ class User < ApplicationRecord
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
       user.password = SecureRandom.urlsafe_base64
       user.nickname = "guestuser"
+      user.introduction = "This is a guest user introduction." # 300文字以内に収める
+      user.phone_number = "0000000000" # 一意性とフォーマットを満たす
     end
   end
     

@@ -1,2 +1,41 @@
-<h1>Admin::Playgrounds#index</h1>
-<p>Find me in app/views/admin/playgrounds/index.html.erb</p>
+<div class="row" style="display: flex; align-items: center; justify-content: space-between;">
+
+<h2 style="margin-left: 10px;">遊び場一覧</h2>
+
+<div class="mb-3">
+  <%= link_to "新しい遊び場の登録" ,new_admin_playground_path, class:"btn btn-lg btn-primary" %>
+</div> 
+
+  </div>
+
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>遊び場ID</th>
+            <th>施設名</th>
+            <th>住所</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @playgrounds.each do |playground| %>
+            <tr>
+              <td><%= playground.id %></td>
+              <td><%= link_to playground.name, admin_playground_path(playground) %></td>
+              <td><%= playground.address %></td>
+              <td>
+              <% if playground.is_active == true %>
+                <div class="text-success font-weight-bolder">営業</div>
+              <% else %>
+                <div class="text-muted font-weight-bolder">閉業</div>
+              <% end %>
+              </td>
+            </tr>
+            <% end %>
+            <%= paginate @playgrounds,class: "text-center" %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+ 

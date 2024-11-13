@@ -31,6 +31,16 @@
         </div>
       </div>
 
+      <div class="form-group row border-bottom">
+      <div class="col-4">
+        タグ
+      </div>
+      <div class="col-8" style="margin-bottom: 10px;">
+        <%= f.text_field :tag_list, value: post.tags.map(&:name).join(", "), class: "w-100" %>
+        <small>全角のカンマかスペース、＃で区切ってください</small>
+      </div>
+    </div>
+
     <div class="form-group row border-bottom">
       <div class="col-4">
       画像
