@@ -1,8 +1,7 @@
 class Admin::PlaygroundsController < ApplicationController
   before_action :authenticate_admin!
   def index
-    @playgrounds = Playground.all
-    @playgrounds = Playground.page(params[:page]).per(10)
+    @playgrounds = Playground.order(created_at: :desc).page(params[:page]).per(5)
   end
 
   def new
@@ -11,8 +10,10 @@ class Admin::PlaygroundsController < ApplicationController
 
   def create
     @playground = Playground.new(playground_params)
+    tags = parse_tags(params[:playground][:tag_id])
+
     if @playground.save
-      @playground.update_tags(tags)
+      @playground.update_tags(params[:playground][:tag_list])
       flash[:notice] = "新しい遊び場が作成されました。"
       redirect_to admin_playground_path(@playground)
     else
@@ -39,7 +40,7 @@ class Admin::PlaygroundsController < ApplicationController
     if @playground.update(playground_params.except(:playground_images)) # 画像以外の属性を更新
       @playground.update_tags(tags)
       flash[:notice] = '遊び場が更新されました。'
-      redirect_to @playground
+      redirect_to admin_playground_path(@playground)
     else
       flash[:alert] = '遊び場の更新に失敗しました。'
       render :edit

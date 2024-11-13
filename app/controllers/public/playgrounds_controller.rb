@@ -5,8 +5,7 @@ class Public::PlaygroundsController < ApplicationController
   end
 
   def index
-    @playgrounds = Playground.where(is_active: true).order(created_at: :desc)
-    @playgrounds_pages = @playgrounds.page(params[:page]).per(5)
+    @playgrounds = Playground.order(created_at: :desc).page(params[:page]).per(5)
   end
   
   def tagged

@@ -29,7 +29,7 @@
               <%= truncate(post.body, length: 50) %>
             </td>
             <td>
-                <%= link_to '削除', admin_post(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+                <%= link_to '削除', admin_post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
             </td>
           </tr>
         <% end %>
