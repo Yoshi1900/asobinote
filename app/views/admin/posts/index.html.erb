@@ -1,2 +1,54 @@
-<h1>Admin::Posts#index</h1>
-<p>Find me in app/views/admin/posts/index.html.erb</p>
+<div class="row" style="display: flex; align-items: center; justify-content: space-between;">
+
+<h2 style="margin-left: 10px;">投稿一覧</h2>
+
+<div class="mb-3">
+  <%= link_to "新しい遊び場の登録" ,new_admin_playground_path, class:"btn btn-lg btn-primary" %>
+</div> 
+
+  </div>
+
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>投稿ID</th>
+            <th></th>
+            <th>タイトル</th>
+            <th>評価</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @posts.each do |post| %>
+            <tr>
+              <td><%= post.id %></td>
+              <td>
+                <% if post.post_images.attached? %>
+                  <%= image_tag post.post_images.first.variant(resize_to_limit: [100, 100]), class: "thumbnail" %>
+                <% else %>
+                  <span>画像はありません</span>
+                <% end %>
+              </td>
+              <td><%= link_to post.title, admin_post_path(post) %></td>
+              <td>
+                <%= render "/public/posts/static_rate", post: post %>
+              </td>
+              <td>
+              <% if post.is_displayed == true %>
+                <div class="text-success font-weight-bolder">表示</div>
+              <% else %>
+                <div class="text-muted font-weight-bolder">非表示</div>
+              <% end %>
+              </td>
+            </tr>
+            <% end %>
+           
+        </tbody>
+      </table>
+      <%= paginate @posts, class: "text-center" %>
+    </div>
+    
+  </div>
+   
+ 

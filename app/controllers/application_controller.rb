@@ -26,10 +26,6 @@ class ApplicationController < ActionController::Base
     end
   
 
-    def after_sign_out_path_for(resource_or_scope)
-      about_path # サインアウト後に遷移するページを指定
-    end
-
 
     def search
       @range = params[:range]

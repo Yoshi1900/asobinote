@@ -1,7 +1,9 @@
 class Playground < ApplicationRecord
+  has_many :posts, dependent: :destroy
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
-  has_many :posts, dependent: :destroy
+
+
   belongs_to :user, optional: true
   has_many_attached :playground_images
 
@@ -75,8 +77,9 @@ class Playground < ApplicationRecord
   end
 
   def update_tags(tag_names)
+    return unless tag_names.present?
     # タグの重複を排除
-    tag_names = tag_list.split(/[,\s;:#\u3000\uFF1A\uFF0C\uFF03]+/).map(&:strip).uniq
+    tag_names = tag_names.uniq
   
     # 現在のタグ名のリストを取得
     current_tags = self.tags.pluck(:name)

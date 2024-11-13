@@ -1,2 +1,33 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<div class="row min-vh-100">
+  <div class="col-7 mt-3">
+    <div class="post-images mt-3">
+      <% if @post.post_images.attached? %>
+        <% @post.post_images.each do |image| %>
+          <%= image_tag image, class: "post-image", size: "200x150" %>
+        <% end %>
+      <% else %>
+        <p>画像がありません</p>
+      <% end %>
+    </div>
+    <div>
+      <p><strong>タイトル:</strong> <%= @post.title %></p>
+      <p><strong>本文:</strong> <%= @post.body %></p>
+      <p><strong>評価:</strong><%= render "public/posts/static_rate", post: @post %></p>
+      <%= link_to '削除する', admin_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+      <%= link_to '遊び場に戻る', admin_playground_path(@post.playground), class: 'btn btn-secondary' %>
+    </div>
+  </div>
+
+  <div class="col-5 mt-3">
+  <%= render 'public/shared/flash' %>
+    <div class="flex">
+      <h4>コメント<div style="font-size: 14px;"><%= @post.post_comments.count %>件</div></h4>
+    </div>
+    <% @post.post_comments.each do |post_comment| %>
+      <div class="row comment">
+        <p><strong><%= post_comment.user.nickname %></strong>: <%= post_comment.comment %></p>
+          <%= link_to '削除', admin_post_post_comment_path(@post, post_comment), method: :delete, data: { confirm: 'コメントを削除してもよろしいですか？' }, class: 'btn btn-danger btn-sm' %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -16,7 +16,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
-    tags = parse_tags(params[:post][:tag_id]) # parse_tagsを使用してタグを分割
+    tags = parse_tags(params[:post][:tag_list]) # parse_tagsを使用してタグを分割
     if @post.save
       @post.update_tags(tags) # Postモデルで定義したメソッドでPostにタグを関連付け
       @post.playground.update_tags(tags) # Playgroundモデルで定義したメソッドでPlaygroundにも同じタグを関連付け
@@ -41,6 +41,7 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:playground_id, 
                                  :title, 
                                  :body, 
+                                 :tag_list,
                                  :star, 
                                  :is_displayed, 
                                  post_images: [])

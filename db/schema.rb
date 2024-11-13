@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_10_232159) do
+ActiveRecord::Schema.define(version: 2024_11_10_232160) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -73,6 +73,16 @@ ActiveRecord::Schema.define(version: 2024_11_10_232159) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "post_taggings", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id", "tag_id"], name: "index_post_taggings_on_post_id_and_tag_id", unique: true
+    t.index ["post_id"], name: "index_post_taggings_on_post_id"
+    t.index ["tag_id"], name: "index_post_taggings_on_tag_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
     t.integer "playground_id"
@@ -125,6 +135,8 @@ ActiveRecord::Schema.define(version: 2024_11_10_232159) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "playgrounds", "users"
+  add_foreign_key "post_taggings", "posts"
+  add_foreign_key "post_taggings", "tags"
   add_foreign_key "posts", "playgrounds"
   add_foreign_key "posts", "users"
   add_foreign_key "taggings", "playgrounds"
