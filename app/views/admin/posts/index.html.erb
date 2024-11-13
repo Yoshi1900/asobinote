@@ -1,12 +1,6 @@
 <div class="row" style="display: flex; align-items: center; justify-content: space-between;">
-
-<h2 style="margin-left: 10px;">投稿一覧</h2>
-
-<div class="mb-3">
-  <%= link_to "新しい遊び場の登録" ,new_admin_playground_path, class:"btn btn-lg btn-primary" %>
-</div> 
-
-  </div>
+  <h2 style="margin-left: 10px;">投稿一覧</h2>
+</div>
 
       <table class="table">
         <thead class="thead-light">
@@ -43,12 +37,8 @@
               </td>
             </tr>
             <% end %>
-           
         </tbody>
       </table>
       <%= paginate @posts, class: "text-center" %>
-    </div>
-    
-  </div>
    
  

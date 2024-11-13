@@ -14,6 +14,7 @@
         <th></th>
         <th>遊び場名</th>
         <th>説明</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -27,10 +28,17 @@
           <td>
             <%= link_to playground.name, playground_path(playground), class: 'playground-link' %>
           </td>
-          <td><%= truncate(playground.description, length: 50) %></td>
+          <td><%= truncate(playground.description, length: 10) %></td>
+          <td>
+            <% if playground.is_active == true %>
+              <div class="text-success font-weight-bolder">営業</div>
+            <% else %>
+              <div class="text-muted font-weight-bolder">閉業</div>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
-<%= paginate @playgrounds_pages %>
+<%= paginate @playgrounds %>

@@ -6,7 +6,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.where(is_displayed: true).order(created_at: :desc).page(params[:page]).per(10)
+    @posts = Post.where(is_displayed: true).order(created_at: :desc).page(params[:page]).per(5)
   end
 
   def show
@@ -30,6 +30,7 @@ class Public::PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+    @post.post_comments.destroy_all
     @post.destroy
     flash[:notice] = '投稿の削除に成功しました'
     redirect_to playground_path(@post.playground) 

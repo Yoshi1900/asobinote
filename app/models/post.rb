@@ -3,7 +3,7 @@ class Post < ApplicationRecord
     belongs_to :user
     has_many :post_comments, dependent: :destroy
     has_many_attached :post_images
-    has_many :post_taggings
+    has_many :post_taggings, dependent: :destroy
     has_many :tags, through: :post_taggings
     
     validates :title, presence: true, length: { maximum: 50 }
@@ -32,7 +32,7 @@ class Post < ApplicationRecord
     
       # タグをカンマやスペースで分割し、前後の空白を取り除いた配列を取得
       tag_names = tag_list.split(/[,\s;:#\u3000\uFF1A\uFF0C\uFF03]+/).map(&:strip).uniq
-    
+
       # 現在のタグ名のリストを取得
       current_tags = self.tags.pluck(:name)
       old_tags = current_tags - tag_names
