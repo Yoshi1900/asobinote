@@ -30,7 +30,7 @@
             </td>
             <td>
               <% if current_user == @user %>
-                <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+                <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
               <% end %>
             </td>
           </tr>
