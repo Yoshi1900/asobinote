@@ -1,48 +1,47 @@
 <header>
   <div class="row">
- 
     <nav class="navbar navbar-expand-lg w-100" style="background-color: #5ce0e5;">
       <div class="col-md-4 d-flex align-items-center">
         <h1><%= link_to image_tag("asobinote_logo.png", alt: "Title Logo", size: "300x100"), "/" %></h1>
       </div>
-    <div class="col-md-2 text-center d-flex align-items-center">
-      <% if user_signed_in? %>
-        ようこそ、<%= current_user.nickname %>さん！
-      <% end %>
-    </div>
-    <div class="col-md-6"> 
-       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-          <% if user_signed_in? %>
-            <!--ユーザーがログインしている時 -->
-            <li><%= link_to "使い方", about_path, class: "btn btn-custom" %></li>
-            <li class="ml-3"><%= link_to "マイページ", mypage_path, class: "btn btn-custom" %></li>
-            <li class="ml-3"><%= link_to "遊び場一覧", playgrounds_path, class: "btn btn-custom" %></li>
-            <li class="ml-3"><%= link_to "投稿一覧", posts_path, class: "btn btn-custom" %></li>
-            <li class="ml-3"><%= link_to "タグ一覧", tags_path, class: "btn btn-custom" %></li>
-            <li class="ml-3"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-custom" %></li>
-
-          <% elsif admin_signed_in? %>
-            <!-- 管理者がログインしている時 -->
-            <li><%= link_to "ユーザー一覧", admin_users_path, class: "btn btn-custom" %></li>
-            <li class="ml-3"><%= link_to "遊び場一覧", admin_playgrounds_path, class: "btn btn-custom" %></li>
-            <li class="ml-3"><%= link_to "投稿一覧" , admin_posts_path, class: "btn btn-custom" %></li>
-            <li class="ml-3"><%= link_to "タグ一覧", admin_tags_path, class: "btn btn-custom" %></li>
-            <li class="ml-3"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-custom" %></li>
-
-          <% else %>
-            <!-- ログインしていない時 -->
-            <li><%= link_to "使い方", about_path, class: "btn btn-custom " %></li>
-            <li class="ml-3"><%= link_to "新規登録", new_user_registration_path, class: "btn btn-custom" %></li>
-            <li class="ml-3"><%= link_to "ログイン", new_user_session_path, class: "btn btn-custom" %></li>
-          <% end %>
-        </ul>
+      <div class="col-md-2 text-center d-flex align-items-center">
+        <% if user_signed_in? %>
+          ようこそ、<%= current_user.nickname %>さん！
+        <% end %>
       </div>
-      <div class="d-flex justify-content-end mt-3">
-        <%= render "layouts/search" %>
+      <div class="col-md-6"> 
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+              <!--ユーザーがログインしている時 -->
+              <li><%= link_to "使い方", about_path, class: "btn btn-custom" %></li>
+              <li class="ml-3"><%= link_to "マイページ", mypage_path, class: "btn btn-custom" %></li>
+              <li class="ml-3"><%= link_to "遊び場一覧", playgrounds_path, class: "btn btn-custom" %></li>
+              <li class="ml-3"><%= link_to "投稿一覧", posts_path, class: "btn btn-custom" %></li>
+              <li class="ml-3"><%= link_to "タグ一覧", tags_path, class: "btn btn-custom" %></li>
+              <li class="ml-3"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-custom" %></li>
+
+            <% elsif admin_signed_in? %>
+              <!-- 管理者がログインしている時 -->
+              <li><%= link_to "ユーザー一覧", admin_users_path, class: "btn btn-custom" %></li>
+              <li class="ml-3"><%= link_to "遊び場一覧", admin_playgrounds_path, class: "btn btn-custom" %></li>
+              <li class="ml-3"><%= link_to "投稿一覧" , admin_posts_path, class: "btn btn-custom" %></li>
+              <li class="ml-3"><%= link_to "タグ一覧", admin_tags_path, class: "btn btn-custom" %></li>
+              <li class="ml-3"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-custom" %></li>
+
+            <% else %>
+              <!-- ログインしていない時 -->
+              <li><%= link_to "使い方", about_path, class: "btn btn-custom " %></li>
+              <li class="ml-3"><%= link_to "新規登録", new_user_registration_path, class: "btn btn-custom" %></li>
+              <li class="ml-3"><%= link_to "ログイン", new_user_session_path, class: "btn btn-custom" %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <%= render "layouts/search" %>
+        </div>
       </div>
-    </div>
-  </nav>
-      
-    
+    </nav>
+  </div>
+   
 </header>
