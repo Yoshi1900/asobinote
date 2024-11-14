@@ -38,7 +38,7 @@
         <tr>
           <td>
             <% if post.post_images.attached? %>
-              <%= image_tag post.images.first.variant(resize_to_limit: [50, 50]), class: "thumbnail" %>
+              <%= image_tag post.post_images.first.variant(resize_to_limit: [50, 50]), class: "thumbnail" %>
             <% end %>
           </td>
           <td><%= link_to post.title, post_path(post) %></td>
