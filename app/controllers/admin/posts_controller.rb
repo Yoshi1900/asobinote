@@ -11,12 +11,12 @@ class Admin::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    tags = parse_tags(params[:post][:tag_id])
+    tags = parse_tags(params[:post][:tag_list])
     if post_params[:post_images].present?
       @post.post_images.attach(playground_params[:post_images]) # 既存の画像を保持しつつ新しい画像を追加
     end
     if @post.update(post_params.except(:post_images))
-      # @post.update_tags(tags)
+      @post.playground.post_update_tags(tags)
       flash[:notice] = "投稿が更新されました。"
       redirect_to admin_post_path(@post)
     else
