@@ -100,4 +100,25 @@ class Playground < ApplicationRecord
     end
   end
   
+  # postから追加のタグを登録する
+  def post_update_tags(tag_names)
+    return unless tag_names.present?
+    # タグの重複を排除
+    tag_names = tag_names.split(",") if tag_names.is_a?(String)
+    tag_names = tag_names.map(&:strip).uniq
+  
+    # 現在のタグと元々のタグを合わせる
+    current_tags = self.tags.pluck(:name)
+    new_tags = tag_names + current_tags
+  
+    # 合わせたタグの追加
+    new_tags.each do |new_tag|
+      tag = Tag.find_or_create_by(name: new_tag)
+      self.tags << tag unless self.tags.exists?(name: new_tag)
+    end
+  end
+
+
+
+
 end
