@@ -8,6 +8,12 @@ class Admin::PlaygroundsController < ApplicationController
     @playground = Playground.new
   end
 
+  def tagged
+    # パラメータからタグを見つけ、そのタグに紐づいたPlaygroundを取得
+    @tag = Tag.find(params[:tag_id])
+    @playgrounds = @tag.playgrounds
+  end
+
   def create
     @playground = Playground.new(playground_params)
     tags = parse_tags(params[:playground][:tag_id])

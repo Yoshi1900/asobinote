@@ -18,13 +18,19 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'sessions#new', as: :admin_root
     resources :users, only: [:index, :edit, :show, :update, :destroy]
-    resources :tags, only: [:index, :edit, :update, :destroy]
+    resources :tags, only: [:index, :edit, :update, :destroy]do
+      get 'playgrounds', to: 'playgrounds#tagged', as: :playgrounds
+     end
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
       resources :post_comments, only: [:create,:destroy]
       delete 'remove_image', on: :member
     end
-    resources :tags, only: [:index]
-    resources :playgrounds, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+    resources :playgrounds, only: [:index, :new, :create, :show, :edit, :update, :destroy]do
+      member do
+        delete :remove_image
+      end
+    end
+     get 'search', to: 'searches#search', as: 'search'
   end
   
 
@@ -33,19 +39,19 @@ Rails.application.routes.draw do
     get "about", to: "homes#about"
     resources :posts, only: [:index, :new, :show, :create, :destroy] do
       resources :post_comments, only: [:create,:destroy]
+      delete 'remove_image', on: :member
     end
     resources :playgrounds, only: [:new, :index, :show, :create, :edit, :update]do
       member do
         delete :remove_image
       end
     end
-    resources :tags, only: [:index]
     get '/mypage' => 'users#mypage', as: :mypage
     get 'users/unsubscribe' => 'users#unsubscribe'
     patch 'users/withdraw' => 'users#withdraw'
     resources :users, only: [:show, :edit, :update] 
     post "guest_sign_in", to: "sessions#guest_sign_in"
-    resources :tags, only: [:show] do
+    resources :tags, only: [:show,:index] do
       get 'playgrounds', to: 'playgrounds#tagged', as: :playgrounds
     end
     get 'search', to: 'searches#search', as: 'search'

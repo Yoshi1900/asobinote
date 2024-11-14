@@ -9,7 +9,7 @@
       <p>
         <strong>タグ:</strong> 
         <% @playground.tags.each_with_index do |tag, index| %>
-          <%= link_to tag.name, tag_path(tag) %><%= ", " unless index == @playground.tags.size - 1 %>
+          <%= link_to tag.name, admin_tag_playgrounds_path(tag) %><%= ", " unless index == @playground.tags.size - 1 %>
         <% end %>
       </p>
       <p><strong>郵便番号:</strong> <%= @playground.post_code %></p>
