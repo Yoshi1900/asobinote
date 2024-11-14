@@ -17,7 +17,7 @@
             <%= image_tag playground.playground_images.first.variant(resize_to_limit: [50, 50]), class: "thumbnail" %>
           <% end %>
         </td>
-        <td><%= link_to playground.name, playground_path(playground) %></td> <!-- Playgroundの詳細ページリンク -->
+        <td><%= link_to playground.name, admin_playground_path(playground) %></td> <!-- Playgroundの詳細ページリンク -->
         <td><%= playground.address %></td>
         <td><%= playground.description %></td>
       </tr>

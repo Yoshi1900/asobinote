@@ -1,11 +1,14 @@
 <h1>タグ一覧</h1>
-
+  <%= render 'public/shared/flash' %>
 <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;">
   <% @tags.each_slice(20) do |tags_slice| %>
     <div>
-      <ul>
+      <ul class="list-unstyled">
         <% tags_slice.each do |tag| %>
-          <li><%= link_to tag.name, tag_playgrounds_path(tag) %></li>
+          <li class="d-flex justify-content-between align-items-center mb-2">
+            <%= link_to tag.name, admin_tag_playgrounds_path(tag) %>
+            <%= link_to '削除', admin_tag_path(tag), method: :delete, data: { confirm: '本当にこのタグを削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+          </li>
         <% end %>
       </ul>
     </div>
