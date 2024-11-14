@@ -6,6 +6,7 @@ class Admin::SearchesController < ApplicationController
     @range = params[:range]
     @search_type = params[:search] 
 
+    
     if @range == "ユーザー"
       @users = User.looks(params[:search], params[:word])
     elsif @range == "遊び場"
