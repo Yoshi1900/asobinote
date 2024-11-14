@@ -85,20 +85,20 @@
 
       <!-- 右側のカラム -->
       <div class="col-md-6">
-        <div class="field">
-          <%= f.label :post_images, "画像の追加・編集" %>
-          <%= f.file_field :post_images, multiple: true, direct_upload: true %>
-          <p>※ 既存の画像は以下に表示されます。削除する場合は画像を選択して削除を実行してください。</p>
-          <div class="post-images">
-            <% @post.post_images.each do |image| %>
-              <div class="image-preview">
-                <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "playground-image" %>
-                <%= link_to '削除', remove_image_admin_post_path(@post, image_id: image.id), method: :delete, data: { confirm: 'この画像を削除しますか？' } %>
-              </div>
-            <% end %>
-          </div>
+      <div class="field">
+        <%= f.label :playground_images, "画像の追加・編集" %>
+        <%= f.file_field :playground_images, multiple: true, direct_upload: true %>
+        <p>※ 既存の画像は以下に表示されます。削除する場合は画像を選択して削除を実行してください。</p>
+        <div class="playground-images">
+          <% @playground.playground_images.each do |image| %>
+            <div class="image-preview">
+              <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "playground-image" %>
+              <%= link_to '削除', remove_image_playground_path(@playground, image_id: image.id), method: :delete, data: { confirm: 'この画像を削除しますか？' } %>
+            </div>
+          <% end %>
         </div>
       </div>
+    </div>
     </div>
 
     <!-- 送信ボタンを下中央に配置 -->
