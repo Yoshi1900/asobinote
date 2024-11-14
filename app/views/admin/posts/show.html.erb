@@ -15,7 +15,7 @@
       <p>
         <strong>タグ:</strong> 
         <% @post.tags.each_with_index do |tag, index| %>
-          <%= link_to tag.name, tag_path(tag) %><%= ", " unless index == @post.tags.size - 1 %>
+          <%= link_to tag.name, admin_tag_playgrounds_path(tag) %><%= ", " unless index == @post.tags.size - 1 %>
         <% end %>
       </p>
       <p><strong>遊び場:</strong> <%= link_to @post.playground.name, admin_playground_path(@post.playground) %></p>

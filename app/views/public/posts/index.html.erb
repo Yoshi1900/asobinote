@@ -27,7 +27,7 @@
         <td>
           <%= truncate(post.body, length: 50) %>
         </td>
-        <td><%= post.star %></td>
+        <td><%= render "public/posts/static_rate", post: post %></td>
       </tr>
     <% end %>
   </tbody>
