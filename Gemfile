@@ -68,3 +68,4 @@ gem "net-pop"
 gem "net-imap"
 # gem 'impressionist'
 gem 'ransack'
+gem "enum_help"

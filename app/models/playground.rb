@@ -7,8 +7,9 @@ class Playground < ApplicationRecord
   belongs_to :user, optional: true
   has_many_attached :playground_images
 
-  validates :name, presence: true, length: { maximum: 30 }
+  validates :name, presence: true, length: { maximum: 20 }
   validates :description, presence: true, length: { maximum: 300 }
+  validates :post_code, presence: true,format: { with: /\A\d{7}\z/ }
   validates :phone_number, presence: true, uniqueness: true,format: { with: /\A\d{10,11}\z/ }
   validate :image_count_within_limit
 
@@ -28,6 +29,20 @@ class Playground < ApplicationRecord
     end
     playground_images.first.variant(resize_to_limit: [width, height]).processed
   end
+
+  def combined_images(new_images)
+    # 既存の画像を取得し、新しい画像と結合
+    existing_images = playground_images.blobs# 現在の画像データを取得
+    combined = existing_images + Array(new_images) # 配列に変換し、新しい画像と結合
+    # 合計枚数が8枚を超えている場合、nilを返す
+    if combined.size > 8
+      errors.add(:playground_images, "は合計8枚までしか保存できません。")
+      return nil
+    end
+    combined
+  end
+
+
 
   # 画像の枚数制限のバリデーション
   def image_count_within_limit

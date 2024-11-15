@@ -13,7 +13,15 @@ class Admin::PostsController < ApplicationController
     @post = Post.find(params[:id])
     tags = parse_tags(params[:post][:tag_list])
     if post_params[:post_images].present?
-      @post.post_images.attach(playground_params[:post_images]) # 既存の画像を保持しつつ新しい画像を追加
+      combined_images = @post.combined_images(params[:post][:post_images]) # 既存の画像と新しい画像を合わせて追加
+    # combined_imagesがnilならば処理を停止し、エラーメッセージを表示
+    if combined_images.present?
+        params[:post][:post_images].each do |new_image|
+          @post.post_images.attach(new_image)
+        end
+      else
+        render :edit and return
+      end
     end
     if @post.update(post_params.except(:post_images))
       @post.playground.post_update_tags(tags)
