@@ -27,6 +27,20 @@ class Post < ApplicationRecord
 
     end
 
+    def combined_images(new_images)
+      # 既存の画像を取得し、新しい画像と結合
+      existing_images = post_images.blobs
+      # existing_images = post_images.attachments # 現在の画像データを取得
+      combined = existing_images + Array(new_images) # 配列に変換し、新しい画像と結合
+      # 合計枚数が8枚を超えている場合、nilを返す
+      if combined.size > 8
+        errors.add(:post_images, "は合計8枚までしか保存できません。")
+        return nil
+      end
+      combined
+    end
+
+
     def save_tags_from_list
       return unless tag_list.present?
     
