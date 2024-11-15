@@ -1,3 +1,4 @@
+<%= render 'public/shared/flash' %>
 <div class="row min-vh-100">
   <div class="col-7 mt-3">
     <div class="post-images mt-3">
@@ -29,7 +30,7 @@
   </div>
 
   <div class="col-5 mt-3">
-    <%= render 'public/shared/flash' %>
+
     <div class="flex">
       <h4>コメント<div style="font-size: 14px;"><%= @post.post_comments.count %>件</div></h4>
     </div>
