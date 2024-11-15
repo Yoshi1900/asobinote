@@ -31,7 +31,14 @@ class Public::PlaygroundsController < ApplicationController
     tags = parse_tags(params[:playground][:tag_id])
 
     if playground_params[:playground_images].present?
-      @playground.playground_images.attach(playground_params[:playground_images]) # 既存の画像を保持しつつ新しい画像を追加
+      combined_images = @playground.combined_images(params[:playground][:playground_images]) # 既存の画像と新しい画像を合わせて追加
+      if combined_images.present?
+        params[:playground][:playground_images].each do |new_image|
+          @playground.playground_images.attach(new_image)
+        end
+      else
+        render :edit and return
+      end
     end
 
     if @playground.update(playground_params.except(:playground_images)) # 画像以外の属性を更新
@@ -54,7 +61,6 @@ class Public::PlaygroundsController < ApplicationController
       flash[:notice] = '遊び場が作成されました。'
       redirect_to @playground
     else
-      flash[:alert] = '遊び場の作成に失敗しました。'
       render :new
     end
   end
