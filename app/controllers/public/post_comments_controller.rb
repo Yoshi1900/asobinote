@@ -8,6 +8,7 @@ class Public::PostCommentsController < ApplicationController
     @post_comment.user = current_user
 
     if @post_comment.save
+      flash[:notice] = 'コメントの追加に成功しました。'
       redirect_to post_path(@post)
     else
       flash[:alert] = 'コメントの追加に失敗しました。'
