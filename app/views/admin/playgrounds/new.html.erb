@@ -12,10 +12,10 @@
     <div class="form-group row border-bottom">
       <div class="col-5 d-flex align-items-center">
         <span>遊び場名</span>
-        <span class="ml-2" style="font-size: 0.8rem; gray;">20文字まで</span>
+        <span class="ml-2" style="font-size: 0.8rem; gray;">50文字まで</span>
       </div>
       <div class="col-7" style="margin-bottom: 10px;">
-        <%= f.text_field :name, required: true, class: "w-100" %>
+        <%= f.text_field :name, required: true, class: "w-100", maxlength: 50 %>
       </div>
     </div>
 
@@ -23,10 +23,10 @@
     <div class="form-group row border-bottom">
       <div class="col-5 d-flex align-items-center">
         <span>説明</span>
-        <span class="ml-2" style="font-size: 0.8rem; gray;">300文字まで</span>
+        <span class="ml-2" style="font-size: 0.8rem; gray;">500文字まで</span>
       </div>
       <div class="col-7" style="margin-bottom: 10px;">
-        <%= f.text_area :description, required: true, class: "w-100" %>
+        <%= f.text_area :description, required: true, class: "w-100", maxlength: 500 %>
       </div>
     </div>
     
@@ -43,10 +43,10 @@
     <div class="form-group row border-bottom">
       <div class="col-5 d-flex align-items-center">
         <span>画像</span>
-        <span class="ml-2" style="font-size: 0.8rem; gray;">1枚1Mサイズ以下合計8枚まで</span>
+        <span class="ml-2" style="font-size: 0.8rem; gray;">1枚1MB以下合計8枚まで</span>
       </div>
       <div class="col-7" style="margin-bottom: 10px;">
-        <%= f.file_field :playground_images, multiple: true, direct_upload: true %>
+        <%= f.file_field :playground_images, multiple: true, direct_upload: true, id: "playground_images" %>
       </div>
     </div>
 
@@ -55,7 +55,7 @@
         郵便番号
       </div>
       <div class="col-7" style="margin-bottom: 10px;">
-        <%= f.text_field :post_code, required: true, class: "w-100" %>
+        <%= f.text_field :post_code, required: true, class: "w-100", maxlength: 7, pattern: "\\d{7}", title: "7文字の数字を入力してください" %>
       </div>
     </div>
 
@@ -71,10 +71,10 @@
     <div class="form-group row border-bottom">
       <div class="col-5 d-flex align-items-center">
         <span>電話番号</span>
-        <span class="ml-2" style="font-size: 0.8rem; gray;">ハイフンなしの10～11文</span>
+        <span class="ml-2" style="font-size: 0.8rem; gray;">ハイフンなしの10～11桁の数字</span>
       </div>
       <div class="col-7" style="margin-bottom: 10px;">
-        <%= f.text_field :phone_number, required: true, class: "w-100" %>
+        <%= f.text_field :phone_number, required: true, class: "w-100", pattern: "\\d{10,11}", maxlength: 11, title: "ハイフンなしの10～11文字の数字を入力してください" %>
       </div>
     </div>
     

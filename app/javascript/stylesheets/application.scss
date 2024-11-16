@@ -96,3 +96,15 @@ footer {
   float: right;
   margin-left: 10px; /* 必要に応じて調整 */
 }
+
+// /* フォームがすべての条件を満たしている場合（OK） */
+// form:valid {
+//   border: 2px solid green;
+//   background-color: #e6ffe6;
+// }
+
+// /* フォームが条件を満たしていない場合（NG） */
+// form:invalid {
+//   border: 2px solid red;
+//   background-color: #ffe6e6;
+// }

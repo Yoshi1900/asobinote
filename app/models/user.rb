@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :nickname, presence: true, length: { maximum: 20 }
   validates :introduction, presence: true, length: { maximum: 300 }
   validates :phone_number, presence: true, uniqueness: true,format: { with: /\A\d{10,11}\z/ }
-
+  validate :validate_avatar_image
 
   
   def get_avatar_image(width, height)
@@ -55,5 +55,19 @@ class User < ApplicationRecord
     end
   end
 
+  def validate_avatar_image
+    return unless avatar_image.attached?
+
+    # 画像サイズの制限（1MB以下）
+    if avatar_image.byte_size > 1.megabyte
+      errors.add(:avatar_image, "は1MB以下にしてください")
+    end
+
+    # 画像形式の制限（オプション）
+    acceptable_types = ["image/jpeg", "image/png", "image/gif"]
+    unless acceptable_types.include?(avatar_image.content_type)
+      errors.add(:avatar_image, "はJPEG, PNG, またはGIF形式でなければなりません")
+    end
+  end
 
 end

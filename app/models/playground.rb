@@ -7,12 +7,11 @@ class Playground < ApplicationRecord
   belongs_to :user, optional: true
   has_many_attached :playground_images
 
-  validates :name, presence: true, length: { maximum: 20 }
-  validates :description, presence: true, length: { maximum: 300 }
-  validates :post_code, presence: true,format: { with: /\A\d{7}\z/ }
-  validates :phone_number, presence: true, uniqueness: true,format: { with: /\A\d{10,11}\z/ }
-  validate :image_count_within_limit
-
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :description, presence: true, length: { maximum: 500 }
+  validates :post_code, presence: true, format: { with: /\A\d{7}\z/, message: "はハイフンなしの7文字の数字で入力してください" }
+  validates :phone_number, presence: true, uniqueness: true,format: { with: /\A\d{10,11}\z/, message: "はハイフンなしの10～11文字の数字で入力してください"  }
+  validate :validate_playground_images
 
   # 仮想属性として tag_list を定義
   attr_accessor :tag_list
@@ -42,14 +41,6 @@ class Playground < ApplicationRecord
     combined
   end
 
-
-
-  # 画像の枚数制限のバリデーション
-  def image_count_within_limit
-    if playground_images.attached? && playground_images.count > 8
-      errors.add(:playground_images, "は合計8枚までしかアップロードできません。")
-    end
-  end
 
   def self.looks(search, word)
     if search == "perfect_match"
@@ -133,7 +124,21 @@ class Playground < ApplicationRecord
     end
   end
 
+  private
 
+  def validate_playground_images
+    # 最大8枚までの制限
+    if playground_images.count > 8
+      errors.add(:playground_images, "画像は合計で8枚までアップロード可能です")
+    end
+
+    # 各画像のサイズ制限 (1MB = 1,048,576 bytes)
+    playground_images.each do |image|
+      if image.byte_size > 1.megabyte
+        errors.add(:playground_images, "各画像のサイズは1MB以下にしてください")
+      end
+    end
+  end
 
 
 end
