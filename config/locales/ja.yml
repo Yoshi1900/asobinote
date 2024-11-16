@@ -12,18 +12,21 @@ ja:
         nickname: 'ニックネーム'
         phone_number: '電話番号'
         introduction: '自己紹介'
+        avatar_image: 'アバター画像'
       playground: 
         name: '遊び場名'
         description: '説明'
         post_code: '郵便番号'
         address: '住所'
         phone_number: '電話番号'
+        playground_images: '遊び場の画像'
       post_comments:
         comment: 'コメント'
       post:
         title: 'タイトル'
         body: '本文'
         star: '評価'
+        post_images: '投稿の画像'
       tag:
         name: 'タグ名'
     errors:

@@ -13,7 +13,7 @@
         タイトル
         </div>
         <div class="col-8" style="margin-bottom: 10px;">
-          <%= f.text_field :title, required: true %>
+          <%= f.text_area :title, required: true, maxlength: 50 %></br>
           <small>50文字まで</small>
         </div>
       </div>
@@ -23,7 +23,7 @@
           本文
         </div>
         <div class="col-8" style="margin-bottom: 10px;">
-          <%= f.text_area :body, required: true, class: "w-100" %>
+          <%= f.text_area :body, required: true, class: "w-100", maxlength: 500 %>
           <small>500文字まで</small>
         </div>
       </div>
@@ -43,8 +43,8 @@
       画像
       </div>
       <div class="col-8" style="margin-bottom: 10px;">
-        <%= f.file_field :post_images, multiple: true, direct_upload: true %></br>
-        <small>1MB以下で最大8枚まで</small>
+         <%= f.file_field :post_images, multiple: true, direct_upload: true, id: "post_images" %></br>
+        <small>1MB以下で合計8枚まで</small>
       </div>
     </div>
 

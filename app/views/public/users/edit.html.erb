@@ -8,70 +8,70 @@
 
 <div class="row">
   <%= form_with model: @user, url:user_path do |f| %>
- <div class="row">
-  <!-- 左側の列 -->
-  <div class="col-xl-5">
-    <div class="form-group row border-bottom">
-      <div class="col-5">アバター画像</div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.file_field :avatar_image, placeholder: "ファイルを選択", accept: "image/*" %>
-         <div style="font-size: 0.8em; color: gray;">&nbsp;画像サイズは1MB以下</div>
-      </div>
-    </div>
+  <div class="row">
+    <!-- 左側の列 -->
+      <div class="col-xl-5">
+        <div class="form-group row border-bottom">
+          <div class="col-5">アバター画像</div>
+          <div class="col-7" style="margin-bottom: 15px;">
+          <%= f.file_field :avatar_image, placeholder: "ファイルを選択", accept: "image/*", id: "avatar_image" %>
+          <div style="font-size: 0.8em; color: gray;">画像サイズは1MB以下,形式はjpeg,png,gifのみ</div>
+          </div>
+        </div>
 
-    <div class="form-group row border-bottom">
-      <div class="col-5">ニックネーム</div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.text_field :nickname, required: true,class: "form-control w-100" %>
-      </div>
-    </div>
+        <div class="form-group row border-bottom">
+          <div class="col-5">ニックネーム</br><span style="font-size: 0.8em; color: gray;">20文字まで</span></div>
+          <div class="col-7" style="margin-bottom: 15px;">
+            <%= f.text_field :nickname, required: true,class: "form-control w-100", maxlength: 20  %>
+          </div>
+        </div>
 
-    <div class="form-group row border-bottom">
-      <div class="col-5">自己紹介</div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.text_area :introduction, class: "form-control w-100" %>
-      </div>
-    </div>
+        <div class="form-group row border-bottom">
+          <div class="col-5">自己紹介</br><span style="font-size: 0.8em; color: gray;">300文字まで</span></div>
+          <div class="col-7" style="margin-bottom: 15px;">
+            <%= f.text_area :introduction, class: "form-control w-100", maxlength: 300 %>
+          </div>
+        </div>
 
-    <div class="form-group row border-bottom">
-      <div class="col-5">電話番号</div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.text_field :phone_number,required: true, class: "form-control w-100" %>
+        <div class="form-group row border-bottom">
+          <div class="col-5">電話番号</br><span style="font-size: 0.8em; color: gray;">&nbsp;ハイフンなしの10～11文字</span></div>
+          <div class="col-7" style="margin-bottom: 15px;">
+            <%= f.text_field :phone_number, required: true, class: "w-100", pattern: "\\d{10,11}", maxlength: 11, title: "ハイフンなしの10～11文字の数字を入力してください" %>
+          </div>
+        </div>
       </div>
-    </div>
+
+    <!-- 中央のスペース -->
+    <div class="col-md-2"></div>
+
+    <!-- 右側の列 -->
+      <div class="col-md-5">
+        <div class="form-group row border-bottom">
+          <div class="col-5">メールアドレス</div>
+          <div class="col-7" style="margin-bottom: 15px;">
+            <%= f.email_field :email,required: true, placeholder: "sample@example.com", class: "w-100" %>
+          </div>
+        </div>
+
+        <!-- パスワード再設定フィールド -->
+        <div class="form-group row border-bottom">
+          <div class="col-5">新しいパスワード</div>
+          <div class="col-7" style="margin-bottom: 15px;">
+            <%= f.password_field :password, class: "form-control w-100" %>
+            <div style="font-size: 0.8em; color: gray;">変更がなければ空欄のままお進みください</div>
+          </div>
+        </div>
+
+        <div class="form-group row border-bottom">
+          <div class="col-5">パスワード確認</div>
+          <div class="col-7" style="margin-bottom: 15px;">
+            <%= f.password_field :password_confirmation, class: "form-control w-100" %>
+            <div style="font-size: 0.8em; color: gray;">変更がなければ空欄のままお進みください</div>
+
+          </div>
+        </div>
+      </div>
   </div>
-
-  <!-- 中央のスペース -->
-  <div class="col-md-2"></div>
-
-  <!-- 右側の列 -->
-  <div class="col-md-5">
-    <div class="form-group row border-bottom">
-      <div class="col-5">メールアドレス</div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.email_field :email,required: true, placeholder: "sample@example.com", class: "w-100" %>
-      </div>
-    </div>
-
-    <!-- パスワード再設定フィールド -->
-    <div class="form-group row border-bottom">
-      <div class="col-5">新しいパスワード</div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.password_field :password, class: "form-control w-100" %>
-        <div style="font-size: 0.8em; color: gray;">変更がなければ空欄のままお進みください</div>
-      </div>
-    </div>
-
-    <div class="form-group row border-bottom">
-      <div class="col-5">パスワード確認</div>
-      <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.password_field :password_confirmation, class: "form-control w-100" %>
-        <div style="font-size: 0.8em; color: gray;">変更がなければ空欄のままお進みください</div>
-
-      </div>
-    </div>
-  </div>
-</div>
 
     <div class="row justify-content-center">
       <%= f.submit "編集内容を保存", class: "col-4 btn btn-success" %>

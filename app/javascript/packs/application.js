@@ -12,10 +12,10 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"; 
-
-
+import "./playground_validation";
+import "./post_validation";
+import "./user_validation";
 window.$ = window.jQuery = require('jquery');
-
 
 
 Rails.start()
