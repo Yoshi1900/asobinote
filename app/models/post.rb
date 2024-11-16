@@ -8,7 +8,7 @@ class Post < ApplicationRecord
     
     validates :title, presence: true, length: { maximum: 50 }
     validates :body, presence: true, length: { maximum: 300 }
-    validate :image_count_within_limit
+    validate :validate_post_images
 
     # 仮想属性として tag_list を定義
     attr_accessor :tag_list
@@ -90,11 +90,18 @@ class Post < ApplicationRecord
 
     private
 
-    def image_count_within_limit
-      if post_images.attached? && post_images.count > 8
-        errors.add(:post_images, "は合計8枚までしか保存できません。")
+    def validate_post_images
+      # 最大8枚の制限
+      if post_images.count > 8
+        errors.add(:post_images, "画像は最大8枚までアップロードできます")
       end
-
+  
+      # 各画像のサイズ制限（1MB = 1,048,576バイト）
+      post_images.each do |image|
+        if image.byte_size > 1.megabyte
+          errors.add(:post_images, "各画像のサイズは1MB以下にしてください")
+        end
+      end
     end
 
     def self.looks(search, word)

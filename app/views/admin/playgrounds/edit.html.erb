@@ -18,7 +18,7 @@
             <span class="ml-2" style="font-size: 0.8rem; gray;">20文字まで</span>
           </div>
           <div class="col-7" style="margin-bottom: 10px;">
-            <%= f.text_field :name, required: true, class: "w-100" %>
+            <%= f.text_field :name, required: true, class: "w-100", maxlength: 50 %>
           </div>
         </div>
 
@@ -28,7 +28,7 @@
             <span class="ml-2" style="font-size: 0.8rem; gray;">300文字まで</span>
           </div>
           <div class="col-7" style="margin-bottom: 10px;">
-            <%= f.text_area :description, required: true, class: "w-100" %>
+            <%= f.text_area :description, required: true, class: "w-100", maxlength: 500 %>
           </div>
         </div>
 
@@ -49,7 +49,7 @@
             郵便番号
           </div>
           <div class="col-7" style="margin-bottom: 10px;">
-            <%= f.text_field :post_code, required: true, class: "w-100" %>
+            <%= f.text_field :post_code, required: true, class: "w-100", maxlength: 7, pattern: "\\d{7}", title: "7文字の数字を入力してください" %>
           </div>
         </div>
 
@@ -67,7 +67,7 @@
             電話番号
           </div>
           <div class="col-7" style="margin-bottom: 10px;">
-            <%= f.text_field :phone_number, required: true, class: "w-100" %>
+            <%= f.text_field :phone_number, required: true, class: "w-100", pattern: "\\d{10,11}", maxlength: 11, title: "ハイフンなしの10～11文字の数字を入力してください" %>
           </div>
         </div>
 
@@ -87,7 +87,8 @@
       <div class="col-md-6">
       <div class="field">
         <%= f.label :playground_images, "画像の追加・編集" %>
-        <%= f.file_field :playground_images, multiple: true, direct_upload: true %>
+        <%= f.file_field :playground_images, multiple: true, direct_upload: true, id: "playground_images" %>
+        <p>1枚1MB以下合計8枚まで</p>
         <p>※ 既存の画像は以下に表示されます。削除する場合は画像を選択して削除を実行してください。</p>
         <div class="playground-images">
           <% @playground.playground_images.each do |image| %>
