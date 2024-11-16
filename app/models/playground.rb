@@ -13,6 +13,10 @@ class Playground < ApplicationRecord
   validates :phone_number, presence: true, uniqueness: true,format: { with: /\A\d{10,11}\z/, message: "はハイフンなしの10～11文字の数字で入力してください"  }
   validate :validate_playground_images
 
+  geocoded_by :address
+  after_validation :geocode
+
+
   # 仮想属性として tag_list を定義
   attr_accessor :tag_list
 
