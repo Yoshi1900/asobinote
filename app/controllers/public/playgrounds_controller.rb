@@ -5,7 +5,15 @@ class Public::PlaygroundsController < ApplicationController
   end
 
   def index
-    @playgrounds = Playground.order(created_at: :desc).page(params[:page]).per(5)
+    # @playgrounds = Playground.order(created_at: :desc).page(params[:page]).per(5)
+    respond_to do |format|
+      format.html do
+        @playgrounds = Playground.page(params[:page])
+      end
+      format.json do
+        @playground = Playground.all
+      end
+    end
   end
   
   def tagged

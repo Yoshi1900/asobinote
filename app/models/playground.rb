@@ -16,7 +16,6 @@ class Playground < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
-
   # 仮想属性として tag_list を定義
   attr_accessor :tag_list
 
