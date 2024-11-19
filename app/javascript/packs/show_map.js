@@ -19,7 +19,7 @@ async function initMap() {
     mapTypeControl: false
   });
   try {
-    const response = await fetch("/playgrounds.json");
+    const response = await fetch("/playgroundId.json");
     if (!response.ok) throw new Error('Network response was not ok');
 
     const { data: { playgrounds } } = await response.json();

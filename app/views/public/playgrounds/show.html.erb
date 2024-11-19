@@ -69,33 +69,11 @@
     
   </div>
   <div id="map"></div>
-  <%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>
-<!--    <div id='map'></div> -->
+  <%= javascript_pack_tag 'show_map', 'data-turbolinks-track': 'reload' %>
 
-# <style>
-# map {
-#   height: 600px;
-#   width: 100%;
-# }
-# </style>
-
-# <!-- js部分 -->
-# <script>
-# //初期マップの設定
-# let map
-# let marker
-# function initMap(){
-#   geocoder = new google.maps.Geocoder()
-
-#   map = new google.maps.Map(document.getElementById('map'), {
-#     center:  {lat: <%= @playground.latitude %>, lng: <%= @playground.longitude %>},
-#     zoom: 15,
-#   });
-
-#    marker = new google.maps.Marker({
-#     position:  {lat: <%= @playground.latitude %>, lng: <%= @playground.longitude %>},
-#     map: map
-#   });
-# }
-# </script>
-# <script src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEYI&callback=initMap" async defer></script> 
+<style>
+map {
+  height: 600px;
+  width: 100%;
+}
+</style> 

@@ -11,7 +11,8 @@ class Public::PlaygroundsController < ApplicationController
         @playgrounds = Playground.page(params[:page])
       end
       format.json do
-        @playground = Playground.all
+        @playgrounds = Playground.all
+#        render json: { data: { playground: @playgrounds }}
       end
     end
   end
@@ -23,10 +24,18 @@ class Public::PlaygroundsController < ApplicationController
   end
 
   def show
-    @playground = Playground.find(params[:id])  
-    @playgrounds_pages = @playground.posts.page(params[:page]).per(5)
-    @post = Post.new
-    @tags = @playground.tags.pluck(:name).join(',')
+    respond_to do |format|
+      format.html do
+        @playground = Playground.find(params[:id])  
+        @playgrounds_pages = @playground.posts.page(params[:page]).per(5)
+        @post = Post.new
+        @tags = @playground.tags.pluck(:name).join(',')
+      end
+      format.json do
+        @playgrounds = Playground.where(id: params[:id])  
+        # render json: { data: { playground: @playgrounds }}
+      end
+    end
   end
 
   def edit

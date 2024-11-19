@@ -70,44 +70,54 @@ Playground.find_or_create_by!(name: "大城遊園地") do |playground|
   playground.user_id = User.all.sample.id
   playground.playground_images = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/playground1.jpg"), filename:"playground1.jpg")
   playground.description = "大人気の遊園地"
-  playground.post_code = "1111111"
-  playground.address = "富山県高岡市大城町123-12"
+  playground.post_code = "9300151"
+  playground.address = "富山県富山市古沢254"
   playground.phone_number = "3214567891"
+  playground.latitude ="36.69213308"
+  playground.longitude ="137.1486898"
 end
 
 Playground.find_or_create_by!(name: "せん動物園") do |playground|
   playground.user_id = User.all.sample.id
   playground.playground_images = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/playground2.jpg"), filename:"playground2.jpg")
   playground.description = "美しい動物園"
-  playground.post_code = "2222222"
-  playground.address = "富山県富山市戦場ヶ原町233-23"
+  playground.post_code = "9390362"
+  playground.address = "富山県射水市黒河4474-6"
   playground.phone_number = "8792163214"
+  playground.latitude ="36.6939415"
+  playground.longitude ="137.100595"
 end
 
 Playground.find_or_create_by!(name: "魚川ファインモール") do |playground|
   playground.user_id = User.all.sample.id
   playground.playground_images = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/playground3.jpg"), filename:"playground3.jpg")
   playground.description = "定期的に様々なイベントを行っているショッピングモール"
-  playground.post_code = "3333333"
-  playground.address = "富山県魚川立浪町784-32"
+  playground.post_code = "9392716"
+  playground.address = "富山県富山市婦中町下轡田165-1"
   playground.phone_number ="4863161841"
+  playground.latitude ="36.662442"
+  playground.longitude ="137.1712519"
 end
 Playground.find_or_create_by!(name: "青空スポーツ公園") do |playground|
   playground.user_id = User.all.sample.id
   playground.playground_images = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/playground4.jpg"), filename: "playground4.jpg")
   playground.description = "スポーツが楽しめる広大な公園"
-  playground.post_code = "4444444"
-  playground.address = "富山県砺波市青空町456-34"
+  playground.post_code = "9300805"
+  playground.address = "富山県富山市湊入船町12-1"
   playground.phone_number = "3456789123"
+  playground.latitude ="36.7068194"
+  playground.longitude ="137.2140741"
 end
 
 Playground.find_or_create_by!(name: "星の子ミュージアム") do |playground|
   playground.user_id = User.all.sample.id
   playground.playground_images = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/playground5.jpg"), filename: "playground5.jpg")
   playground.description = "家族で楽しめる科学博物館"
-  playground.post_code = "5555555"
-  playground.address = "富山県高岡市星町567-45"
+  playground.post_code = "9360021"
+  playground.address = "富山県滑川市中川原410"
   playground.phone_number = "9876543210"
+  playground.latitude ="36.7741045"
+  playground.longitude ="137.3443626"
 end
 
 Playground.find_or_create_by!(name: "森の遊び場") do |playground|
@@ -119,9 +129,11 @@ Playground.find_or_create_by!(name: "森の遊び場") do |playground|
     ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/playground8.jpg"), filename: "playground8.jpg")
   ]
   playground.description = "自然と触れ合える遊び場"
-  playground.post_code = "6666666"
-  playground.address = "富山県黒部市森町123-56"
+  playground.post_code = "9308510"
+  playground.address = "富山県富山市新桜町7-38"
   playground.phone_number = "1233681890"
+  playground.latitude ="36.695952"
+  playground.longitude ="137.213677"
 end
 
 20.times do
