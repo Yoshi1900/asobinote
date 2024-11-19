@@ -5,7 +5,7 @@
   </div>
 
   <div class="mb-3">
-    <%= link_to "新しい遊び場の登録" ,new_playground_path, class:"btn btn-lg btn-primary" %>
+    <%= link_to "新しい遊び場の登録" ,new_playground_path, class:"btn btn-lg btn-primary", data: {turbolinks: "false"} %>
   </div>
 
   <table class="table table-striped">
@@ -42,3 +42,5 @@
   </table>
 
  <%= paginate @playgrounds,class: "text-center" %>
+  <div id="map"></div>
+  <%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>

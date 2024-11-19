@@ -16,7 +16,6 @@ class Playground < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
-
   # 仮想属性として tag_list を定義
   attr_accessor :tag_list
 
@@ -32,6 +31,7 @@ class Playground < ApplicationRecord
     end
     playground_images.first.variant(resize_to_limit: [width, height]).processed
   end
+  
 
   def combined_images(new_images)
     # 既存の画像を取得し、新しい画像と結合

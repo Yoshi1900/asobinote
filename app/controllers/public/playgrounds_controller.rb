@@ -5,7 +5,16 @@ class Public::PlaygroundsController < ApplicationController
   end
 
   def index
-    @playgrounds = Playground.order(created_at: :desc).page(params[:page]).per(5)
+    # @playgrounds = Playground.order(created_at: :desc).page(params[:page]).per(5)
+    respond_to do |format|
+      format.html do
+        @playgrounds = Playground.page(params[:page])
+      end
+      format.json do
+        @playgrounds = Playground.all
+#        render json: { data: { playground: @playgrounds }}
+      end
+    end
   end
   
   def tagged
@@ -15,10 +24,18 @@ class Public::PlaygroundsController < ApplicationController
   end
 
   def show
-    @playground = Playground.find(params[:id])  
-    @playgrounds_pages = @playground.posts.page(params[:page]).per(5)
-    @post = Post.new
-    @tags = @playground.tags.pluck(:name).join(',')
+    respond_to do |format|
+      format.html do
+        @playground = Playground.find(params[:id])  
+        @playgrounds_pages = @playground.posts.page(params[:page]).per(5)
+        @post = Post.new
+        @tags = @playground.tags.pluck(:name).join(',')
+      end
+      format.json do
+        @playgrounds = Playground.where(id: params[:id])  
+        # render json: { data: { playground: @playgrounds }}
+      end
+    end
   end
 
   def edit
