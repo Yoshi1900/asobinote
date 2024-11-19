@@ -59,7 +59,7 @@ gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
-
+gem 'stimulus-rails'
 gem 'geocoder'
 gem 'devise'
 gem 'kaminari'

@@ -6,15 +6,18 @@ class Public::PlaygroundsController < ApplicationController
 
   def index
     # @playgrounds = Playground.order(created_at: :desc).page(params[:page]).per(5)
-    respond_to do |format|
-      format.html do
-        @playgrounds = Playground.page(params[:page])
-      end
-      format.json do
-        @playgrounds = Playground.all
-#        render json: { data: { playground: @playgrounds }}
-      end
-    end
+
+    # respond_to do |format|
+    #   format.html do
+    #     @playgrounds = Playground.page(params[:page])
+    #   end
+    #   format.json do
+    #     @playgrounds = Playground.all
+    #   end
+    # end
+    @playgrounds = Playground.all
+    @playrounds_json = @playgrounds.map { |o| playground_to_hash(o) }.to_json
+
   end
   
   def tagged
@@ -24,18 +27,19 @@ class Public::PlaygroundsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html do
-        @playground = Playground.find(params[:id])  
-        @playgrounds_pages = @playground.posts.page(params[:page]).per(5)
-        @post = Post.new
-        @tags = @playground.tags.pluck(:name).join(',')
-      end
-      format.json do
-        @playgrounds = Playground.where(id: params[:id])  
-        # render json: { data: { playground: @playgrounds }}
-      end
-    end
+    # respond_to do |format|
+    #   format.html do
+         @playground = Playground.find(params[:id])  
+         @playgrounds_pages = @playground.posts.page(params[:page]).per(5)
+         @post = Post.new
+         @tags = @playground.tags.pluck(:name).join(',')
+    #   end
+    #   format.json do
+    #     @playgrounds = Playground.where(id: params[:id])  
+    #     # render json: { data: { playground: @playgrounds }}
+    #   end
+    # end
+    @playground_json = playground_to_hash(@playground).to_json
   end
 
   def edit
@@ -106,10 +110,17 @@ class Public::PlaygroundsController < ApplicationController
                                        :phone_number, 
                                        :is_active, 
                                        :user_id,
+                                       :latitude,
+                                       :longitude,
                                        playground_images: []).tap do |playground_params|
                                         playground_params[:user_id] = current_user.id if current_user.present?
                                       end
   end
-
+  def playground_to_hash(playground)
+    { id: playground.id,
+      name: playground.name,
+      lat: playground.latitude,
+      lng: playground.longitude }
+  end
 
 end

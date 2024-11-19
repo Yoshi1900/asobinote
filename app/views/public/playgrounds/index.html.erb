@@ -41,6 +41,11 @@
     </tbody>
   </table>
 
- <%= paginate @playgrounds,class: "text-center" %>
+ <%#= paginate @playgrounds,class: "text-center" %>
   <div id="map"></div>
   <%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>
+<h1>Points#index</h1>
+
+<%= @playgrounds.inspect %>
+<br><br>
+<%= @playgrounds_json %>
