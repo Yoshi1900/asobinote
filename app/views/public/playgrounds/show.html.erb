@@ -68,3 +68,12 @@
     <%= paginate @playgrounds_pages %>
     
   </div>
+  <div id="map"></div>
+  <%= javascript_pack_tag 'show_map', 'data-turbolinks-track': 'reload' %>
+
+<style>
+map {
+  height: 600px;
+  width: 100%;
+}
+</style> 

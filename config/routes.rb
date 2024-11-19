@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :public do
+    get 'maps/show'
+  end
+  namespace :public do
     get 'tags/index'
   end
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
@@ -55,6 +58,7 @@ Rails.application.routes.draw do
       get 'playgrounds', to: 'playgrounds#tagged', as: :playgrounds
     end
     get 'search', to: 'searches#search', as: 'search'
+    resource :map, only: [:show]
   end
 
 end
