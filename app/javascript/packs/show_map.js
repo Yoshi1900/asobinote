@@ -12,20 +12,17 @@ async function initMap() {
   const { Map } = await google.maps.importLibrary("maps");
   const {AdvancedMarkerElement} = await google.maps.importLibrary("marker")
   // 地図の中心と倍率は公式から変更しています。
-  map = new Map(document.getElementById("map"), {
-    center: { lat: 	36.7017294, lng: 137.2132271 }, 
-    zoom: 15,
-    mapId: "DEMO_MAP_ID",
-    mapTypeControl: false
-  });
+  
   try {
-    const response = await fetch("/playgroundId.json");
+    const playgroundId = document.getElementById('map').dataset.id;
+    const response = await fetch(`/playgrounds/${playgroundId}.json`);
     if (!response.ok) throw new Error('Network response was not ok');
 
     const { data: { playgrounds } } = await response.json();
     if (!Array.isArray(playgrounds)) throw new Error("playgrounds is not an array");
   
     console.log(playgrounds);
+
 
     playgrounds.forEach( playground => {
       const latitude = playground.latitude;
@@ -35,6 +32,13 @@ async function initMap() {
       const address = playground.address;
       const description = playground.description;
 
+      map = new Map(document.getElementById("map"), {
+        center: { lat: latitude, lng: longitude }, 
+        zoom: 15,
+        mapId:  process.env.Maps_API_Key,
+        mapTypeControl: false
+      });
+
       const marker = new google.maps.marker.AdvancedMarkerElement ({
         position: { lat: latitude, lng: longitude },
         map: map,
@@ -42,6 +46,7 @@ async function initMap() {
         // 他の任意のオプションもここに追加可能
       });
 
+      
   // 最初の画像または「画像がありません」を判定
        const imageElement = playground_images && playground_images.length > 0
     ? `<img src="${playground_images[0]}" alt="${playground_name}" class="img-fluid mb-3">`
@@ -82,5 +87,6 @@ async function initMap() {
   }
 
 }
-
+window.addEventListener('load',function(){
 initMap()
+});
