@@ -15,7 +15,7 @@ async function initMap() {
   map = new Map(document.getElementById("map"), {
     center: { lat: 	36.7017294, lng: 137.2132271 }, 
     zoom: 15,
-    mapId: "DEMO_MAP_ID",
+    mapId: process.env.Maps_API_Key,
     mapTypeControl: false
   });
   try {
