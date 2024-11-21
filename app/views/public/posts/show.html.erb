@@ -39,7 +39,9 @@
       <div class="row comment">
         <p><strong><%= link_to post_comment.user.nickname, user_path(post_comment.user) %></strong>: <%= post_comment.comment %></p>
         <% if post_comment.user == current_user %>
-          <%= link_to '削除', post_post_comment_path(@post, post_comment), method: :delete, data: { confirm: 'コメントを削除してもよろしいですか？' }, class: 'btn btn-danger btn-sm' %>
+          <div class="col-auto">
+            <%= link_to '削除', post_post_comment_path(@post, post_comment), method: :delete, data: { confirm: 'コメントを削除してもよろしいですか？' }, class: 'btn btn-danger btn-sm' %>
+          </div>
         <% end %>
       </div>
     <% end %>
