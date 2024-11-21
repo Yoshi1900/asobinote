@@ -9,7 +9,14 @@ class Public::SearchesController < ApplicationController
     if @range == "ユーザー"
       @users = User.looks(params[:search], params[:word])
     elsif @range == "遊び場"
-      @playgrounds = Playground.looks(params[:search], params[:word])
+      respond_to do |format|
+        format.html do
+          @playgrounds = Playground.looks(params[:search], params[:word])
+        end
+        format.json do
+          @playgrounds = Playground.looks(params[:search], params[:word])
+        end
+      end
     elsif @range == "投稿"
       @posts = Post.looks(params[:search], params[:word])
     elsif @range == "タグ"

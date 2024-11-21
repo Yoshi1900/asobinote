@@ -113,3 +113,13 @@ footer {
   width: 100%;
   height: calc(100vh - 88px - 179px);
 }
+
+.slick-next {
+	right: 10px !important;
+	z-index: 100;
+ }
+
+.slick-prev {
+	left: 10px !important;
+  z-index: 100;
+ }
