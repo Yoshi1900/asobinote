@@ -1,28 +1,34 @@
+
 (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
   key: process.env.Maps_API_Key
 });
+
+
 
 // ライブラリの読み込み
 let map;
 
 async function initMap() {
   const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker")
+  const {AdvancedMarkerElement} = await google.maps.importLibrary("marker")
   // 地図の中心と倍率は公式から変更しています。
   map = new Map(document.getElementById("map"), {
-    center: { lat: 36.7017294, lng: 137.2132271 },
+    center: { lat: 	36.7017294, lng: 137.2132271 }, 
     zoom: 11,
     mapId: process.env.Maps_API_Key,
     mapTypeControl: false
   });
   try {
-    const response = await fetch("/playgrounds.json");
+    //const url = location.protocol + "//" + location.host + location.pathname +".json" + location.search;
+    const response = await fetch(location.pathname +".json" + location.search);
     if (!response.ok) throw new Error('Network response was not ok');
 
     const { data: { playgrounds } } = await response.json();
     if (!Array.isArray(playgrounds)) throw new Error("playgrounds is not an array");
+  
+    console.log(playgrounds);
 
-    playgrounds.forEach(playground => {
+    playgrounds.forEach( playground => {
       const latitude = playground.latitude;
       const longitude = playground.longitude;
       const playground_name = playground.playground_name;
@@ -31,7 +37,7 @@ async function initMap() {
       const description = playground.description;
       const detail_page_url = playground.detail_page_url
 
-      const marker = new google.maps.marker.AdvancedMarkerElement({
+      const marker = new google.maps.marker.AdvancedMarkerElement ({
         position: { lat: latitude, lng: longitude },
         map: map,
         title: playground_name,
@@ -51,7 +57,8 @@ async function initMap() {
         imageElement = '<p class="text-muted mb-3">画像がありません</p>';
       }
 
-      // 追記
+
+       // 追記
       const contentString = `
   <div class="information container p-0">
     <div class="information container p-0">
@@ -63,7 +70,6 @@ async function initMap() {
       </h1>
       <p class="text-muted">${address}</p>
       <p class="lead">${description}</p>
-  
     </div>
   </div>
   `;
@@ -75,10 +81,10 @@ async function initMap() {
 
       marker.addListener("click", () => {
         infowindow.open({
-          anchor: marker,
-          map: map,
+        anchor: marker,
+        map: map,
         })
-
+ 
       });
 
     });
@@ -88,7 +94,6 @@ async function initMap() {
   }
 
 }
-
-window.addEventListener('load', function () {
+window.addEventListener('load',function(){
   initMap()
-});
+  });
