@@ -1,12 +1,9 @@
 <%= render 'public/shared/flash' %>
- <%= render "public/shared/error_messages", resource: @post  %>
-<div class="form-group row" style="padding:20px;">
-  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
-    <h2 class="text-center" style="color: #dc3d26;"><%= @playground.name %>の情報</h2>
-  </div>
-</div>
-  <div class="row">
-    <div class="col-4 ">
+<%= render "public/shared/error_messages", resource: @post  %>
+
+<div class="playground-info-container">
+  <div class="row playground-details">
+    <div class="col-md-4 playground-info">
       <p><strong>説明:</strong> <%= @playground.description %></p>
       <p>
         <strong>タグ:</strong> 
@@ -18,12 +15,15 @@
       <p><strong>住所:</strong> <%= @playground.address %></p>
       <p><strong>電話番号:</strong> <%= @playground.phone_number %></p>
       <p><strong>ステータス:</strong> <%= @playground.is_active ? "営業" : "閉業" %></p>
-      <div style="display: flex;"><strong>評価:</strong> <%= @playground.posts.count %>件<%= render "/public/playgrounds/average_rate.html.erb", playground: @playground %></div>
+      <div style="display: flex;">
+        <strong>評価:</strong> <%= @playground.posts.count %>件
+        <%= render "/public/playgrounds/average_rate.html.erb", playground: @playground %>
+      </div>
       <%= link_to '編集', edit_playground_path(@playground), class: 'btn btn-primary' %>
     </div>
-    <div class="col-8 playground-images">
+    <div class="col-md-8 playground-images">
       <% if @playground.playground_images.attached? %>
-         <% @playground.playground_images.each do |image| %>
+        <% @playground.playground_images.each do |image| %>
           <%= image_tag image, class: "playground-image", size: "200x150" %>
         <% end %>
       <% else %>
@@ -31,20 +31,18 @@
       <% end %>
     </div>
   </div>
-  <div class="row">
-  
+
+  <div class="row playground-actions">
     <!-- 新規投稿の部分テンプレート -->
-    <div class="col-5">
-
+    <div class="col-md-5 playground-new-post">
       <%= render "/public/posts/new", post: @post, playground: @playground %>
-    </div> 
-
-    <div class="col-7">
-      <!--  playgroundの投稿一覧 -->
+    </div>
+    <div class="col-md-7 playground-posts">
+      <!-- playgroundの投稿一覧 -->
       <h3>投稿一覧</h3>
       <table class="table table-striped">
         <tbody>
-            <% @playground.posts.each do |playground_post| %> 
+          <% @playground.posts.each do |playground_post| %> 
             <tr>
               <td>
                 <% if playground_post.post_images.attached? %>
@@ -64,17 +62,10 @@
         </tbody>
       </table>
     </div>
-
-    <%= paginate @playgrounds_pages %>
-    
   </div>
 
-  <div id="map" data-id="<%= @playground.id %>"></div>
-  <%= javascript_pack_tag 'show_map', 'data-turbolinks-track': 'reload' %>
+  <%= paginate @playgrounds_pages %>
 
-<style>
-map {
-  height: 600px;
-  width: 100%;
-}
-</style> 
+  <div id="map" class="playground-map" data-id="<%= @playground.id %>"></div>
+  <%= javascript_pack_tag 'show_map', 'data-turbolinks-track': 'reload' %>
+</div>
