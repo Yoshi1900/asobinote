@@ -94,6 +94,6 @@ async function initMap() {
   }
 
 }
-window.addEventListener('load',function(){
+window.addEventListener('turbolinks:load', function () {
   initMap()
-  });
+});

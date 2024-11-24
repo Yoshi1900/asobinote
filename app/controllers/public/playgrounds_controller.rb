@@ -5,22 +5,29 @@ class Public::PlaygroundsController < ApplicationController
   end
 
   def index
-    # @playgrounds = Playground.order(created_at: :desc).page(params[:page]).per(5)
     respond_to do |format|
       format.html do
+        @playgrounds_page = Playground.order(created_at: :desc).page(params[:page]).per(5)
         @playgrounds = Playground.page(params[:page])
       end
       format.json do
         @playgrounds = Playground.all
-#        render json: { data: { playground: @playgrounds }}
       end
     end
   end
   
   def tagged
+    respond_to do |format|
+      format.html do
     # パラメータからタグを見つけ、そのタグに紐づいたPlaygroundを取得
-    @tag = Tag.find(params[:tag_id])
-    @playgrounds = @tag.playgrounds
+        @tag = Tag.find(params[:tag_id])
+        @playgrounds = @tag.playgrounds
+      end
+      format.json do
+        @tag = Tag.find(params[:tag_id])
+        @playgrounds = @tag.playgrounds
+      end
+    end
   end
 
   def show
@@ -33,7 +40,6 @@ class Public::PlaygroundsController < ApplicationController
       end
       format.json do
         @playgrounds = Playground.where(id: params[:id])  
-        # render json: { data: { playground: @playgrounds }}
       end
     end
   end
@@ -75,7 +81,6 @@ class Public::PlaygroundsController < ApplicationController
 
     if @playground.save
       @playground.update_tags(tags)
-      flash[:notice] = '遊び場が作成されました。'
       redirect_to @playground
     else
       render :new

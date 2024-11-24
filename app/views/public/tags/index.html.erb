@@ -1,8 +1,8 @@
 <h1>タグ一覧</h1>
 
-<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;">
+<div class="tag-list">
   <% @tags.each_slice(20) do |tags_slice| %>
-    <div>
+    <div class="tag-column">
       <ul>
         <% tags_slice.each do |tag| %>
           <li><%= link_to tag.name, tag_playgrounds_path(tag) %></li>

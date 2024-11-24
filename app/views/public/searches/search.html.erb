@@ -3,6 +3,7 @@
 <table class="table table-hover table-inverse">
   <!--検索対象モデルがUserの時 -->
   <% if @range == "ユーザー" %>
+  <table class="table table-striped tbl-r04">
     <tbody>
       <% @users.each do |user| %>
         <tr>
@@ -10,31 +11,48 @@
             <%= image_tag user.get_avatar_image(50, 50), alt: user.nickname, class: "avatar-image" %>
           </td>
           <td>
-          <%= link_to user.nickname, user_path(user) %>
+            <%= link_to user.nickname, user_path(user) %>
+          </td>
+          <td>
+            <%= truncate(user.introduction, length: 20) %>
           </td>
         </tr>
       <% end %>
     </tbody>
-
+  </table>
   <% elsif @range == "遊び場" %>
-  <div id="map"></div>
-  <%= javascript_pack_tag 'search_map', 'data-turbolinks-track': 'reload' %>
-    <-- <tbody>
-      <% @playgrounds.each do |playground| %>
-        <tr>
-          <td>
-            <% if playground.playground_images.attached? %>
-              <%= image_tag playground.playground_images.first.variant(resize_to_limit: [50, 50]), class: "thumbnail" %>
+  <div class="wrap">
+    <ul id="tab-menu">
+      <li><a href="#tab1" class="active">地図</a></li>
+      <li><a href="#tab2" class="">遊び場一覧</a></li>
+    </ul>
+    <div id="tab-contents">
+      <div id="tab1" class="tab"> 
+       <div id="map"></div>
+      </div>
+      <div id="tab2" class="tab">
+        <table class="table table-striped tbl-r04">
+          <tbody>
+            <% @playgrounds.each do |playground| %>
+              <tr>
+                <td>
+                  <% if playground.playground_images.attached? %>
+                    <%= image_tag playground.playground_images.first.variant(resize_to_limit: [50, 50]), class: "thumbnail" %>
+                  <% end %>
+                </td>
+                <td><%= link_to playground.name, playground_path(playground) %></td>
+                <td><%= playground.description %></td>
+                <td><%= playground.address %></td>
+              </tr>
             <% end %>
-          </td>
-          <td><%= link_to playground.name, playground_path(playground) %></td>
-          <td><%= playground.description %></td>
-          <td><%= playground.address %></td>
-        </tr>
-      <% end %>
-    </tbody> -->
-
+          </tbody> 
+        </table>
+      </div>
+    </div>
+<%= javascript_pack_tag 'search_map', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'tab_menu', 'data-turbolinks-track': 'reload' %>
   <% elsif @range == "投稿" %>
+  <table class="table table-striped tbl-r04">
     <tbody>
       <% @posts.each do |post| %>
         <tr>
@@ -48,8 +66,9 @@
         </tr>
       <% end %>
     </tbody>
-
+  </table>
   <% elsif @range == "タグ" %>
+  <table class="table table-striped tbl-r04">
     <tbody>
       <% @tags.each do |tag| %>
         <tr>
@@ -57,8 +76,9 @@
         </tr>
       <% end %>
     </tbody>
-
+  </table>
   <% elsif @range == "コメント" %>
+  <table class="table table-striped tbl-r04">
     <tbody>
       <% @post_comments.each do |comment| %>
         <tr>
@@ -68,10 +88,8 @@
         </tr>
       <% end %>
     </tbody>
-
+  </table>
   <% else %>
-    <tbody>
       <h1>検索結果はありません</h1>
-    </tbody>
   <% end %>
 </table>

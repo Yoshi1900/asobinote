@@ -20,7 +20,6 @@ class Public::PostsController < ApplicationController
     if @post.save
       @post.update_tags(tags) # Postモデルで定義したメソッドでPostにタグを関連付け
       @post.playground.post_update_tags(tags) # Playgroundモデルで定義したメソッドでPlaygroundにも同じタグを関連付け
-      flash[:notice] = '投稿が作成され、タグが追加されました。'
       redirect_to @post
     else
       flash[:alert] = '投稿の作成に失敗しました。'

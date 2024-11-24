@@ -1,26 +1,42 @@
-<h1><%= @tag.name %>に関連する遊び場</h1> <!-- タグ名を表示 -->
+<div class="form-group row" style="padding:20px;">
+<div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+  <h2 class="text-center" style="color: #dc3d26;"><%= @tag.name %>に関連する遊び場</h2>
+</div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>遊び場名</th>
-      <th>住所</th>
-      <th>説明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @playgrounds.each do |playground| %>
-      <tr>
-        <td>
-          <% if playground.playground_images.attached? %>
-            <%= image_tag playground.playground_images.first.variant(resize_to_limit: [50, 50]), class: "thumbnail" %>
-          <% end %>
-        </td>
-        <td><%= link_to playground.name, playground_path(playground) %></td> <!-- Playgroundの詳細ページリンク -->
-        <td><%= playground.address %></td>
-        <td><%= playground.description %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="wrap">
+    <ul id="tab-menu">
+      <li><a href="#tab1" class="active">地図</a></li>
+      <li><a href="#tab2" class="">遊び場一覧</a></li>
+    </ul>
+    <div id="tab-contents">
+      <div id="tab1" class="tab"> 
+        <div id="map" class="playground-map" data-id="<%= @tag.id %>"></div>
+      </div>
+      <div id="tab2" class="tab">
+        <table class="table table-striped tbl-r04">
+          <thead>
+            <tr>
+              <th></th>
+              <th>遊び場名</th>
+              <th>住所</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @playgrounds.each do |playground| %>
+              <tr>
+                <td>
+                  <% if playground.playground_images.attached? %>
+                    <%= image_tag playground.playground_images.first.variant(resize_to_limit: [50, 50]), class: "thumbnail" %>
+                  <% end %>
+                </td>
+                <td><%= link_to playground.name, playground_path(playground) %></td> <!-- Playgroundの詳細ページリンク -->
+                <td><%= playground.address %></td>
+                <td><%= playground.description %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+<%= javascript_pack_tag 'tagged_map', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'tab_menu', 'data-turbolinks-track': 'reload' %>
