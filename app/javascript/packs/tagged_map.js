@@ -16,7 +16,8 @@ async function initMap() {
     mapTypeControl: false
   });
   try {
-    const response = await fetch("/playgrounds.json");
+    const tagId = document.getElementById('map').dataset.id;
+    const response = await fetch(`/tags/${tagId}/playgrounds.json`);
     if (!response.ok) throw new Error('Network response was not ok');
 
     const { data: { playgrounds } } = await response.json();
