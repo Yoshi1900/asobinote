@@ -4,7 +4,7 @@
     <div class="post-images mt-3">
       <% if @post.post_images.attached? %>
         <% @post.post_images.each do |image| %>
-          <%= image_tag image, class: "post-image", size: "200x150" %>
+          <%= image_tag image, class: "post-image  popup", size: "200x150" %>
         <% end %>
       <% else %>
         <p>画像がありません</p>
@@ -23,7 +23,7 @@
       <p>
       <p><strong>投稿者:</strong> <%= link_to @post.user.nickname, user_path(@post.user) %></p>
       <p><strong>評価:</strong><%= render "public/posts/static_rate", post: @post %></p>
-      <% if user_signed_in? %>
+      <% if @post.user == current_user %>
         <%= link_to '削除する', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
       <% end %>
       <%= link_to '遊び場に戻る', playground_path(@post.playground), class: 'btn btn-secondary' %>

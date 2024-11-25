@@ -93,7 +93,7 @@
         <div class="playground-images">
           <% @playground.playground_images.each do |image| %>
             <div class="image-preview">
-              <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "playground-image" %>
+              <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "playground-image popup" %>
               <%= link_to '削除', remove_image_playground_path(@playground, image_id: image.id), method: :delete, data: { confirm: 'この画像を削除しますか？' } %>
             </div>
           <% end %>

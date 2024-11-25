@@ -43,7 +43,7 @@
             <tr>
               <td>
                 <% if playground_post.post_images.attached? %>
-                  <%= image_tag playground_post.post_images.first.variant(resize_to_limit: [100, 100]), class: "thumbnail" %>
+                  <%= image_tag playground_post.post_images.first.variant(resize_to_limit: [100, 100]), class: "thumbnail popup" %>
                 <% else %>
                   <span>画像はありません</span>
                 <% end %>
