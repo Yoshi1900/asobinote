@@ -1,5 +1,5 @@
 <div class="form-group row" style="padding:20px;">
-  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+  <div class="offset-md-3 col-md-6 offset-md-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
     <h2 class="text-center" style="color: #dc3d26;"><%= @playground.name %>の編集</h2>
   </div>
 </div>
@@ -93,7 +93,7 @@
           <div class="playground-images">
             <% @playground.playground_images.each do |image| %>
               <div class="image-preview">
-                <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "playground-image" %>
+                <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "playground-image popup" %>
                 <%= link_to '削除', remove_image_playground_path(@playground, image_id: image.id), method: :delete, data: { confirm: 'この画像を削除しますか？' } %>
               </div>
             <% end %>

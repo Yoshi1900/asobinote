@@ -1,5 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :show, :edit, :update]
+  before_action :authorize_user, only: [:destroy]
 
   def new
     @post = Post.new
@@ -47,4 +48,11 @@ class Public::PostsController < ApplicationController
                                  post_images: [])
   end
   
+  def authorize_user
+    @post = Post.find(params[:id])
+    unless @post.user == current_user
+      flash[:alert] = '権限がありません。'
+      redirect_to playground_path(@post.playground)
+    end
+  end
 end

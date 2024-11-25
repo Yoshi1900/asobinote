@@ -37,7 +37,7 @@
               <tr>
                 <td>
                   <% if playground.playground_images.attached? %>
-                    <%= image_tag playground.playground_images.first.variant(resize_to_limit: [50, 50]), class: "thumbnail" %>
+                    <%= image_tag playground.playground_images.first.variant(resize_to_limit: [50, 50]), class: "thumbnail  popup" %>
                   <% end %>
                 </td>
                 <td><%= link_to playground.name, playground_path(playground) %></td>

@@ -2,6 +2,12 @@
 <%= render "public/shared/error_messages", resource: @post  %>
 
 <div class="playground-info-container">
+  <div class="form-group row" style="padding:20px;">
+    <div class="offset-md-3 col-md-6 offset-md-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+      <h2 class="text-center" style="color: #dc3d26;"><%= @playground.name %></h2>
+    </div>
+  </div>
+
   <div class="row playground-details">
     <div class="col-md-4 playground-info">
       <p><strong>説明:</strong> <%= @playground.description %></p>
@@ -24,7 +30,7 @@
     <div class="col-md-8 playground-images">
       <% if @playground.playground_images.attached? %>
         <% @playground.playground_images.each do |image| %>
-          <%= image_tag image, class: "playground-image", size: "200x150" %>
+          <%= image_tag image, class: "playground-image popup", size: "200x150" %>
         <% end %>
       <% else %>
         <p>画像がありません</p>
@@ -46,7 +52,7 @@
             <tr>
               <td>
                 <% if playground_post.post_images.attached? %>
-                  <%= image_tag playground_post.post_images.first.variant(resize_to_limit: [100, 100]), class: "thumbnail" %>
+                  <%= image_tag playground_post.post_images.first.variant(resize_to_limit: [100, 100]), class: "thumbnail popup" %>
                 <% else %>
                   <span>画像はありません</span>
                 <% end %>
