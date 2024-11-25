@@ -72,7 +72,7 @@
           <div class="post-images">
             <% @post.post_images.each do |image| %>
               <div class="image-preview">
-                <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "post-image" %>
+                <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "post-image popup" %>
                <%= link_to '削除', remove_image_admin_post_path(@post, image_id: image.id), method: :delete, data: { confirm: 'この画像を削除しますか？' } %>
               </div>
             <% end %>

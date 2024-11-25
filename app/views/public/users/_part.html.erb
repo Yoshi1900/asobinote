@@ -10,7 +10,7 @@
 
 <div class="profile">
   <% if user.avatar_image.present? %>
-    <%= image_tag user.get_avatar_image(100,100), class: "profile-avatar" %>
+    <%= image_tag user.get_avatar_image(100,100), class: "profile-avatar popup" %>
   <% end %>
   
   <div class="profile-item">

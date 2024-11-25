@@ -18,7 +18,7 @@
             <td style="padding-right: 5px;">
               <% if post.post_images.attached? %>
                 <% post.post_images.first(3).each do |image| %>
-                  <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "thumbnail" %>
+                  <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "thumbnail popup" %>
                 <% end %>
               <% end %>
             </td>
