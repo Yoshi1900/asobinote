@@ -1,39 +1,30 @@
-class PointsController < ApplicationController
+# frozen_string_literal: true
 
-  def index
-    @points = Point.all
-    @points_json = @points.map { |o| point_to_hash(o) }.to_json
-    @point = Point.new
-  end
+class public::ConfirmationsController < Devise::ConfirmationsController
+  # GET /resource/confirmation/new
+  # def new
+  #   super
+  # end
 
-  def show
-    @point = Point.find(params[:id])
-    @point_json = point_to_hash(@point).to_json
-  end
+  # POST /resource/confirmation
+  # def create
+  #   super
+  # end
 
-  def create
-    @point = Point.new(point_params)
-    if @point.save
-      flash[:notice] = 'ポイントを登録しました'
-      redirect_to root_url
-    else
-      @points = Point.all
-      @points_json = @points.map { |o| point_to_hash(o) }.to_json
-      flash.now[:alert] = 'ポイントを登録できませんでした'
-      render :index, status: :unprocessable_entity
-    end
-  end
+  # GET /resource/confirmation?confirmation_token=abcdef
+  # def show
+  #   super
+  # end
 
-  private
+  # protected
 
-  def point_params
-    params.require(:point).permit(:name, :latitude, :longitude, :address, :keyword)
-  end
+  # The path used after resending confirmation instructions.
+  # def after_resending_confirmation_instructions_path_for(resource_name)
+  #   super(resource_name)
+  # end
 
-  def point_to_hash(point)
-    { id: point.id,
-      name: point.name,
-      lat: point.latitude,
-      lng: point.longitude }
-  end
+  # The path used after confirmation.
+  # def after_confirmation_path_for(resource_name, resource)
+  #   super(resource_name, resource)
+  # end
 end
