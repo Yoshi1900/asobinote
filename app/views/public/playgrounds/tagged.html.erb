@@ -1,7 +1,7 @@
 <div class="form-group row" style="padding:20px;">
-<div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
-  <h2 class="text-center" style="color: #dc3d26;"><%= @tag.name %>に関連する遊び場</h2>
-</div>
+  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+    <h2 class="text-center" style="color: #dc3d26;"><%= @tag.name %>に関連する遊び場</h2>
+  </div>
 </div>
 
 <div class="wrap">
@@ -38,5 +38,8 @@
             <% end %>
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
 <%= javascript_pack_tag 'tagged_map', 'data-turbolinks-track': 'reload' %>
 <%= javascript_pack_tag 'tab_menu', 'data-turbolinks-track': 'reload' %>
