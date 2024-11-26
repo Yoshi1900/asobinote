@@ -67,7 +67,7 @@
       <div class="col-md-6">
         <div class="field">
           <%= f.label :post_images, "画像の追加・編集" %>
-          <%= f.file_field :post_images, multiple: true, direct_upload: true %>
+           <%= f.file_field :post_images, multiple: true, direct_upload: true, id: "post_images", accept: "image/jpeg,image/png,image/gif" %></br>
           <p>※ 既存の画像は以下に表示されます。削除する場合は画像を選択して削除を実行してください。</p>
           <div class="post-images">
             <% @post.post_images.each do |image| %>
@@ -92,3 +92,4 @@
     </div>
   <% end %>
 </div>
+<%= javascript_pack_tag "post_images",  'data-turbolinks-track': 'reload' %>

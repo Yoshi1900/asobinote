@@ -135,11 +135,16 @@ class Playground < ApplicationRecord
     if playground_images.count > 8
       errors.add(:playground_images, "画像は合計で8枚までアップロード可能です")
     end
-
-    # 各画像のサイズ制限 (1MB = 1,048,576 bytes)
+  
     playground_images.each do |image|
+      # 各画像のサイズ制限 (1MB = 1,048,576 bytes)
       if image.byte_size > 1.megabyte
         errors.add(:playground_images, "各画像のサイズは1MB以下にしてください")
+      end
+  
+      # ファイル形式の制限 (画像ファイルのみ許可)
+      unless image.content_type.start_with?('image/')
+        errors.add(:playground_images, "画像ファイルのみアップロード可能です")
       end
     end
   end

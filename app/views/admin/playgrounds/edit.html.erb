@@ -87,7 +87,7 @@
       <div class="col-md-6">
       <div class="field">
         <%= f.label :playground_images, "画像の追加・編集" %>
-        <%= f.file_field :playground_images, multiple: true, direct_upload: true, id: "playground_images" %>
+        <%= f.file_field :playground_images, multiple: true, direct_upload: true, id: "playground_images", accept: "image/jpeg,image/png,image/gif" %>
         <p>1枚1MB以下合計8枚まで</p>
         <p>※ 既存の画像は以下に表示されます。削除する場合は画像を選択して削除を実行してください。</p>
         <div class="playground-images">
@@ -111,3 +111,4 @@
   <% end %>
 </div>
 <%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag "playground_images",  'data-turbolinks-track': 'reload' %>
