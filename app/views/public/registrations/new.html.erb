@@ -1,5 +1,5 @@
 <div class="form-group row" style="padding:20px;">
-  <div class="col-6 offset-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
+<div class="offset-md-3 col-md-6 offset-md-3" style="border-radius: 30px; background-color: #5ce0e5; padding-top:5px;">
     <h2 class="text-center" style="color: #dc3d26;">新規会員登録</h2>
   </div>
 </div>
@@ -32,7 +32,7 @@
        アバター画像<span style="font-size: 0.8em; color: gray;">&nbsp;画像は1MB以下のjpeg,png,gifのみ</span>
       </div>
       <div class="col-7" style="margin-bottom: 15px;">
-        <%= f.file_field :avatar_image, placeholder: "ファイルを選択", accept: "image/*", id: "avatar_image" %>
+        <%= f.file_field :avatar_image, placeholder: "ファイルを選択", accept: "image/*", id: "avatar_image", accept: "image/jpeg,image/png,image/gif" %>
       </div>
     </div>
 
@@ -95,4 +95,5 @@
     <%= render "public/shared/links" %>からログインを行ってください。
   </div>
 </div>
+<%= javascript_pack_tag "avatar_images",  'data-turbolinks-track': 'reload' %>
 

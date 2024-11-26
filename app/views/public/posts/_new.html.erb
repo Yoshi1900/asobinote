@@ -43,7 +43,7 @@
       画像
       </div>
       <div class="col-8" style="margin-bottom: 10px;">
-         <%= f.file_field :post_images, multiple: true, direct_upload: true, id: "post_images" %></br>
+         <%= f.file_field :post_images, multiple: true, direct_upload: true, id: "post_images", accept: "image/jpeg,image/png,image/gif" %></br>
         <small>1MB以下で合計8枚まで</small>
       </div>
     </div>

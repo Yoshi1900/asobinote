@@ -46,7 +46,7 @@
         <span class="ml-2" style="font-size: 0.8rem; gray;">1枚1Mサイズ以下合計8枚まで</span>
       </div>
       <div class="col-7" style="margin-bottom: 10px;">
-        <%= f.file_field :playground_images, multiple: true, direct_upload: true, id: "playground_images" %>
+        <%= f.file_field :playground_images, multiple: true, direct_upload: true, id: "playground_images", accept: "image/jpeg,image/png,image/gif" %>
       </div>
     </div>
 
@@ -89,3 +89,4 @@
   <% end %>
 </div>
 <%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag "playground_images",  'data-turbolinks-track': 'reload' %>
